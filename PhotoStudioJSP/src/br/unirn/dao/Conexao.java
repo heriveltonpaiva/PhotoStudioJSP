@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import br.unirn.dominio.Estado;
+
 public class Conexao {
 
 	public static Connection getConexao() throws SQLException {
@@ -28,19 +30,5 @@ public class Conexao {
 	}
 	
 	
-	/**
-	 * TESTE DE CONEXÃO !!!!
-	public static void main(String[] args) {
-		
-
-		Connection conexao;
-		try {
-			conexao = Conexao.getConexao();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	*/
 	
 }
