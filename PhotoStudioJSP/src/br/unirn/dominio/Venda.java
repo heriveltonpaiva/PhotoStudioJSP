@@ -24,14 +24,8 @@ public class Venda  {
     
     private Date dataVenda;
    
-    private int quantidade;
+    private Selecao selecao; 
     
-    private String tamanho;
-   
-    private double valorVenda;
-    
-    private Fotografo idFotografoFotografo;
-
     public Venda() {
     }
 
@@ -42,9 +36,7 @@ public class Venda  {
     public Venda(Integer idVenda, Date dataVenda, int quantidade, String tamanho, double valorVenda) {
         this.idVenda = idVenda;
         this.dataVenda = dataVenda;
-        this.quantidade = quantidade;
-        this.tamanho = tamanho;
-        this.valorVenda = valorVenda;
+
     }
 
     public Integer getIdVenda() {
@@ -71,37 +63,12 @@ public class Venda  {
         this.dataVenda = dataVenda;
     }
 
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public String getTamanho() {
-        return tamanho;
-    }
-
-    public void setTamanho(String tamanho) {
-        this.tamanho = tamanho;
-    }
-
-    public double getValorVenda() {
-        return valorVenda;
-    }
-
-    public void setValorVenda(double valorVenda) {
-        this.valorVenda = valorVenda;
-    }
-
-    public Fotografo getIdFotografoFotografo() {
-        return idFotografoFotografo;
-    }
-
-    public void setIdFotografoFotografo(Fotografo idFotografoFotografo) {
-        this.idFotografoFotografo = idFotografoFotografo;
-    }
+   public Selecao getSelecao() {
+	return selecao;
+}
+   public void setSelecao(Selecao selecao) {
+	this.selecao = selecao;
+}
 
     
 }

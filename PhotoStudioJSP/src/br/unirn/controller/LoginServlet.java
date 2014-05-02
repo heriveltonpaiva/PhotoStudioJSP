@@ -1,0 +1,147 @@
+package br.unirn.controller;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import br.unirn.dao.ClienteDao;
+import br.unirn.dao.FotografoDao;
+import br.unirn.dao.GestorDao;
+import br.unirn.dominio.Cliente;
+import br.unirn.dominio.Fotografo;
+import br.unirn.dominio.Gestor;
+
+/**
+ * Servlet implementation class LoginServlet
+ */
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    
+	GestorDao gestorDao = new  GestorDao();
+	ClienteDao clienteDao = new ClienteDao();
+	FotografoDao fotografoDao = new FotografoDao();
+	
+	
+	
+	/**
+     * @see HttpServlet#HttpServlet()
+     */
+    public LoginServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+    
+    @Override
+    public void init() throws ServletException {
+    
+    }
+    
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+		
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		
+		String nome = request.getParameter("login");
+		String senha = request.getParameter("senha");
+		
+       
+		if(nome.equals("") && senha.equals("")){
+		
+			System.out.println("Nome do Usuário e senha vazio");
+			
+		}else{
+		
+		/*
+		 * VERIFICAR SE O LOGIN E SENHA É DE UM GESTOR	
+		 */
+			
+		try {
+			for (Gestor g : gestorDao.findAll()) {
+				
+				if(g.getLogin().equals(nome) && g.getSenha().equals(senha)){
+					
+			
+					RequestDispatcher dispatcher = request.getRequestDispatcher("pages/gestor/index.jsp");
+					dispatcher.forward(request, response);
+					
+				}
+								
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
+			
+		/*
+		 * VERIFICAR SE O LOGIN E SENHA É DE UM FOTOGRAFO
+		 */
+		
+		try {
+			for (Fotografo f : fotografoDao.findAll()) {
+				
+				if(f.getLogin().equals(nome) && f.getSenha().equals(senha)){
+					
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/fotografo/index.jsp");
+					dispatcher.forward(request, response);
+					
+				}
+			
+				
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		/*
+		 * VERIFICAR SE O LOGIN E SENHA É DE UM CLIENTE
+		 */
+		
+			try {
+				for (Cliente c : clienteDao.findAll()) {
+
+					if (c.getLogin().equals(nome) && c.getSenha().equals(senha)) {
+
+						RequestDispatcher dispatcher = request
+								.getRequestDispatcher("pages/cliente/index.jsp");
+						dispatcher.forward(request, response);
+
+					}
+
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+}

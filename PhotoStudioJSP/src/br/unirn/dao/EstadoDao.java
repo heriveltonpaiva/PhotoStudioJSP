@@ -2,7 +2,9 @@ package br.unirn.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.unirn.dominio.Estado;
@@ -22,17 +24,48 @@ public class EstadoDao  {
 	}
 	
 	
+	private int getID(){
+		int result = 0;
+		String sql = "select nextval('estado_id_estado_seq')";
+		
+		PreparedStatement stmt=null;
+		try {
+			stmt = conexao.prepareStatement(sql);
+		} catch (SQLException e2) {
+			System.out.println("Erro na criação do Statement "+e2);
+		}	
+			
+		ResultSet rs =null;
+		try {
+			rs = stmt.executeQuery();
+		} catch (SQLException e1) {
+			System.out.println("Erro na criação do ResultSet "+e1);
+		}
+		
+		try {
+			while(rs.next()){
+			result = rs.getInt("nextval");
+			}
+			} catch (SQLException e) {
+				System.out.println("Erro na consulta do nextval "+e);
+		}
+		
+		return result;
+	}
+	
 	
 	public void insert(Estado estado) throws SQLException {
 		 //PREPARA CONEXÃO
-        String slq = "INSERT INTO estado(descricao)"
-                + "values(?)";
+		int id = getID();
+        String slq = "INSERT INTO estado(id_estado, descricao)"
+                + "values(?,?)";
 
         PreparedStatement stmt = conexao.prepareStatement(slq);
 
-        // SETANDO OS VALORES 
-        stmt.setString(1, estado.getDescricao());
-       
+        // SETANDO OS VALORES
+        stmt.setInt(1, id);
+        stmt.setString(2, estado.getDescricao());
+        estado.setIdEstado(id);
 
         //executa o codigo SQL
         stmt.execute();
@@ -53,9 +86,24 @@ public class EstadoDao  {
 	}
 
 	
-	public List<Estado> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Estado> findAll() throws SQLException {
+		 String sql = "SELECT*FROM estado";
+	        PreparedStatement stmt = this.conexao.prepareStatement(sql);
+	        ResultSet rs = stmt.executeQuery();
+	        // criando arraylist 
+	        List<Estado> Lista = new ArrayList<Estado>();
+	        while (rs.next()) {
+	            // estanciando 
+	            Estado c1 = new Estado();
+	            // pegando os objetos 
+                c1.setIdEstado(rs.getInt("id_estado"));
+	            c1.setDescricao(rs.getString("descricao"));
+	            
+	            Lista.add(c1);
+	        }
+	        rs.close();
+	        stmt.close();
+		return Lista;
 	}
 
 	public Estado findById(Integer id) {

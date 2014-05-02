@@ -6,6 +6,8 @@
 
 package br.unirn.dominio;
 
+import java.io.InputStream;
+
 
 
 
@@ -18,7 +20,7 @@ public class Foto  {
     
     private double valor;
     
-    private byte[] arquivo;
+    private InputStream arquivo;
     
     private String dataUpload;
     
@@ -27,6 +29,8 @@ public class Foto  {
     private String fotoNome;
    
     private String contenttype;
+    
+    private long fotoSize;
    
     private Integer idAlbumAlbum;
 
@@ -37,7 +41,7 @@ public class Foto  {
         this.idFoto = idFoto;
     }
 
-    public Foto(Integer idFoto, String descricao, double valor, byte[] arquivo, String dataUpload, String fotoNome, String contenttype) {
+    public Foto(Integer idFoto, String descricao, double valor, InputStream arquivo, String dataUpload, String fotoNome, String contenttype) {
         this.idFoto = idFoto;
         this.descricao = descricao;
         this.valor = valor;
@@ -71,12 +75,12 @@ public class Foto  {
         this.valor = valor;
     }
 
-    public byte[] getArquivo() {
+    public InputStream getArquivo() {
         return arquivo;
     }
 
-    public void setArquivo(byte[] arquivo) {
-        this.arquivo = arquivo;
+    public void setArquivo(InputStream inputStream) {
+        this.arquivo = inputStream;
     }
 
     public String getDataUpload() {
@@ -119,6 +123,11 @@ public class Foto  {
         this.idAlbumAlbum = idAlbumAlbum;
     }
 
-  
+   public long getFotoSize() {
+	return fotoSize;
+}
+   public void setFotoSize(long fotoSize) {
+	this.fotoSize = fotoSize;
+}
     
 }

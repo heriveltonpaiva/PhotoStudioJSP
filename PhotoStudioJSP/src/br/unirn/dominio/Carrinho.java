@@ -14,16 +14,7 @@ public class Carrinho  {
   
    
     private Integer idCarrinho;
-    
-   
-    private String descricao;
-    
-    private int quantidade;
-   
-    private String tamanho;
-   
-    private BigInteger valorVenda;
-    
+    private Selecao selecao;  
     private Cliente idClienteCliente;
 
     public Carrinho() {
@@ -35,9 +26,7 @@ public class Carrinho  {
 
     public Carrinho(Integer idCarrinho, int quantidade, String tamanho, BigInteger valorVenda) {
         this.idCarrinho = idCarrinho;
-        this.quantidade = quantidade;
-        this.tamanho = tamanho;
-        this.valorVenda = valorVenda;
+
     }
 
     public Integer getIdCarrinho() {
@@ -48,37 +37,12 @@ public class Carrinho  {
         this.idCarrinho = idCarrinho;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public String getTamanho() {
-        return tamanho;
-    }
-
-    public void setTamanho(String tamanho) {
-        this.tamanho = tamanho;
-    }
-
-    public BigInteger getValorVenda() {
-        return valorVenda;
-    }
-
-    public void setValorVenda(BigInteger valorVenda) {
-        this.valorVenda = valorVenda;
-    }
+   public Selecao getSelecao() {
+	return selecao;
+}
+   public void setSelecao(Selecao selecao) {
+	this.selecao = selecao;
+}
 
     public Cliente getIdClienteCliente() {
         return idClienteCliente;

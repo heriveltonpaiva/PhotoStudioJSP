@@ -1,36 +1,103 @@
 package br.unirn.dao;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import br.unirn.dominio.Carrinho;
 import br.unirn.dominio.Venda;
 
-public class VendaDao implements GenericDao{
+public class VendaDao {
 
-	@Override
-	public void insert(Object entity) {
-		// TODO Auto-generated method stub
+	private Connection conexao;
+	
+	public VendaDao() {
+	
+		try {
+			this.conexao = Conexao.getConexao();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	private int getID(){
+		int result = 0;
+		String sql = "select nextval('venda_id_venda_seq')";
 		
-	}
-
-	@Override
-	public void update(Object entity) {
-		// TODO Auto-generated method stub
+		PreparedStatement stmt=null;
+		try {
+			stmt = conexao.prepareStatement(sql);
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}	
+			
+		ResultSet rs =null;
+		try {
+			rs = stmt.executeQuery();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
-	}
-
-	@Override
-	public void delete(Object entity) {
-		// TODO Auto-generated method stub
+		try {
+			while(rs.next()){
+			result = rs.getInt("nextval");
+			}
+			} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+		return result;
+	}
+	public void insert(Venda v) throws SQLException {
+		 //PREPARA CONEXÃO
+		   int id = getID();
+	       String slq = "INSERT INTO venda(id_venda, descricao, data_venda, id_selecao_selecao) VALUES (?, ?, ?, ?);";
+	               
+
+	       PreparedStatement stmt = conexao.prepareStatement(slq);
+
+	       // SETANDO OS VALORES
+	       stmt.setInt(1, id);
+	       stmt.setString(2, v.getDescricao());
+	       stmt.setDate(3, new Date(1233,11,12));
+	       stmt.setInt(4, v.getSelecao().getIdSelecao());
+	       
+	       v.setIdVenda(id);
+
+	       //executa o codigo SQL
+	       stmt.execute();
+	       stmt.close();
 	}
 
-	@Override
-	public List<Object> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public List<Venda> findAll() throws SQLException {
+		String sql = "SELECT*FROM venda";
+        PreparedStatement stmt = this.conexao.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        // criando arraylist 
+        List<Venda> Lista = new ArrayList<Venda>();
+        while (rs.next()) {
+            // estanciando 
+            Venda v = new Venda();
+            // pegando os objetos 
+            v.setIdVenda(rs.getInt("id_venda"));
+            v.setDescricao(rs.getString("descricao"));
+            
+            Lista.add(v);
+        }
+        rs.close();
+        stmt.close();
+	return Lista;
 	}
 
-	@Override
+	
 	public Object findById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;

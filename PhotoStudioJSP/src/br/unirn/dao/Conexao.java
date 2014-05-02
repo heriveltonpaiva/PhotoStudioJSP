@@ -10,7 +10,7 @@ public class Conexao {
 
 	public static Connection getConexao() throws SQLException {
 		String serverName = "localhost";
-		String mydatabase = "BancoFinal";
+		String mydatabase = "studio";
 		String url = "jdbc:postgresql://" + serverName + "/" + mydatabase;
 		String username = "postgres";
 		String password = "280394";
@@ -22,7 +22,7 @@ public class Conexao {
 			return DriverManager.getConnection(url, username, password);
 
 		} catch (ClassNotFoundException e) {
-			System.out.println("Não Conectado no banco");
+			System.out.println("Não Conectado no banco"+e.getMessage()+" "+e.getCause()+" "+e.getLocalizedMessage());
 
 			throw new SQLException(e.getMessage());
 		}
