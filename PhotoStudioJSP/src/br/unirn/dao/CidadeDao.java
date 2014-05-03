@@ -1,12 +1,14 @@
 package br.unirn.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unirn.dominio.Album;
 import br.unirn.dominio.Bairro;
 import br.unirn.dominio.Cidade;
 import br.unirn.dominio.Estado;
@@ -75,7 +77,21 @@ public class CidadeDao  {
        stmt.close();
 		
 	}
-
+	
+	public void update(Cidade cidade) throws SQLException {
+		String sql = "update cidade set descricao=?,id_estado_estado=? where id_cidade=?";
+		
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setString(1, cidade.getDescricao());
+			stmt.setInt(2, cidade.getIdEstadoEstado().getIdEstado());
+			stmt.setInt(3, cidade.getIdCidade());
+	
+			stmt.execute();
+			stmt.close();
+			
+			System.out.println("Alterado com sucesso");
+	}
+	
 	public List<Cidade> findAll() throws SQLException {
 		 String sql = "SELECT*FROM cidade";
 	        PreparedStatement stmt = this.conexao.prepareStatement(sql);

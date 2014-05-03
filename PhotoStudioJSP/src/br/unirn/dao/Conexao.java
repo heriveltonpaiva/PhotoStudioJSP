@@ -13,7 +13,7 @@ public class Conexao {
 		String mydatabase = "studio";
 		String url = "jdbc:postgresql://" + serverName + "/" + mydatabase;
 		String username = "postgres";
-		String password = "280394";
+		String password = "lkug941312";
 
 		try {
 			Class.forName("org.postgresql.Driver");

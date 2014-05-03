@@ -31,14 +31,15 @@ public class GestorDao {
 	
 	public void update(Gestor gestor) throws SQLException {
 
-      String sql = "UPDATE gestor SET  login=?, senha=? WHERE id_gestor=1";
+      String sql = "UPDATE gestor SET  login=?, senha=? WHERE id_gestor=?";
 		
       PreparedStatement stmt= conexao.prepareStatement(sql);
       //seta os valores
      
       stmt.setString(1,gestor.getLogin()); 
       stmt.setString(2, gestor.getSenha());
-     
+      stmt.setInt(3, gestor.getIdGestor());
+      
       //executa o código sql
       stmt.execute();     
       stmt.close();

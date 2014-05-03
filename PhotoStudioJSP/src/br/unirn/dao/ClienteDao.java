@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unirn.dominio.Album;
 import br.unirn.dominio.Bairro;
 import br.unirn.dominio.Cidade;
 import br.unirn.dominio.Cliente;
@@ -311,9 +312,23 @@ public void insert(Cliente c, Fotografocliente fc) throws SQLException {
 	
 }
 
-public void update(Object entity) {
-	// TODO Auto-generated method stub
+public void update(Cliente cliente) throws SQLException {
+	String sql = "update cliente set nome=?, login=?, senha=?, cpf=?, data_nascimento=?, id_contato_contato=?, id_endereco_endereco=? where id_cliente=?";
 	
+		PreparedStatement stmt = conexao.prepareStatement(sql);
+		stmt.setString(1, cliente.getNome());
+		stmt.setString(2,cliente.getLogin());
+		stmt.setString(3, cliente.getSenha());
+		stmt.setString(4, cliente.getCpf());
+		stmt.setDate(5, (Date) cliente.getDataNascimento());
+		stmt.setInt(6, cliente.getIdContatoContato().getIdContato());
+		stmt.setInt(7, cliente.getIdEnderecoEndereco().getIdEndereco());
+		stmt.setInt(8, cliente.getIdCliente());
+		
+		stmt.execute();
+		stmt.close();
+		
+		System.out.println("Alterado com sucesso");
 }
 
 

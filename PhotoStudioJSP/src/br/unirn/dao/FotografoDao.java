@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unirn.dominio.Album;
 import br.unirn.dominio.Bairro;
 import br.unirn.dominio.Cidade;
 import br.unirn.dominio.Cliente;
@@ -250,10 +251,25 @@ public void insert(Fotografo c) throws SQLException {
 	
 }
 
-public void update(Object entity) {
-	// TODO Auto-generated method stub
+public void update(Fotografo fotografo) throws SQLException {
+	String sql = "update fotografo set nome=?, cpf_fotografo=?, login=?, senha=?, data_nascimento=?, id_contato_contato=?, id_endereco_endereco=? where id_fotografo=?";
 	
+		PreparedStatement stmt = conexao.prepareStatement(sql);
+		stmt.setString(1, fotografo.getNome());
+		stmt.setString(2, fotografo.getCpfFotografo());
+		stmt.setString(3, fotografo.getLogin());
+		stmt.setString(4, fotografo.getSenha());
+		stmt.setDate(5, (Date) fotografo.getDataNascimento());
+		stmt.setInt(6, fotografo.getIdContatoContato().getIdContato());
+		stmt.setInt(7, fotografo.getIdEnderecoEndereco().getIdEndereco());
+		stmt.setInt(8, fotografo.getIdFotografo());
+		
+		stmt.execute();
+		stmt.close();
+		
+		System.out.println("Alterado com sucesso");
 }
+
 
 
 public void delete(Object entity) {
