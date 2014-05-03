@@ -8,12 +8,15 @@
 
  <form method="POST" action="AlbumServlet">
             Nome:
-            <input type="text" name="descricao" value="" size="50" class="form-control" /><br>
+            <input type="text" name="descricao"  size="50" class="form-control" /><br>
             Observa��o:
             <textarea name="obs" rows="6" cols="34" class="form-control">
             </textarea><br>
             <input type="submit" value="Cadastrar" name="cadastrar"  class="btn btn-success" />
+       ${mensagem}
         </form>
+        
+              
 </div>
 </div>
 <%@ include file="footer.jsp" %>

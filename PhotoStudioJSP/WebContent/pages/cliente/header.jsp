@@ -46,6 +46,12 @@
             <li class="dropdown">
               <a href="ListHistoricoServlet" >Meu Historico</a>
             </li>
+            <li>
+             <a href="index.jsp">Encerrar Sessão</a>
+             </li>
+            <li>
+             <a ><b>Bem vindo, ${usuario}</b> - Perfil Cliente</a>
+             </li>
           </ul>
           
         </div><!--/.nav-collapse -->

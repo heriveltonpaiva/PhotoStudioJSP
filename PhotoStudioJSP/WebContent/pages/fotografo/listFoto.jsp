@@ -2,16 +2,28 @@
 <%@ include file="header.jsp" %>
 
 <div class="panel panel-default">
-<div class="panel-heading">Meus Albuns</div>
+<div class="panel-heading">Album de Fotos</div>
 <div class="panel-body">
-   <h4>Escolha um Album:</h4>
-   <select name="Album" size="5" >
-                <option>Album da Familia</option>
-                <option>Album da Escola</option>
-            </select>
-            <button type="submit" >Listar Fotos</button>
-            
-  </div>
+ 
+  <form method="POST" action=""> 
+<div class="col-sm-3">
+         
+            <select name="album" class="form-control" style="margin-top: 20px;">
+               <option >-- Selecione o Album --</option>
+              <c:forEach items="${listaAlbum}" var="obj">
+                <option value="${obj.idAlbum}">${obj.descricao}</option>
+              
+               </c:forEach>
+            </select><br>
+            </div> 
+            <div class="col-sm-1">
+ <input type="submit" value="Pesquisar" name="pesquisar" class="btn btn-warning" style="margin-top: 20px;" />
+
+</div>   
+         
+</form>
+</div>
+ 
   <!-- Default panel contents -->
   <div class="panel-heading">Lista de Fotos</div>
 

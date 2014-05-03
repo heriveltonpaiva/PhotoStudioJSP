@@ -35,7 +35,7 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.jsp">Logout</a></li>
+            <li class="active"><a >Pagina Inicial</a></li>
             
               <li class="dropdown">
               <a  class="dropdown-toggle" data-toggle="dropdown">Meus Fotografo<b class="caret"></b></a>
@@ -50,7 +50,13 @@
              <ul class="dropdown-menu">
                 <li><a href="GestorServlet">Alterar Login</a></li>
               </ul>
-            </li>	
+            </li>
+            <li>
+             <a href="index.jsp">Encerrar Sessão</a>
+             </li>
+            <li>
+             <a ><b>Bem vindo, ${usuario}</b> - Perfil Gestor</a>
+             </li>	
           </ul>
         </div><!--/.nav-collapse -->
       </div>

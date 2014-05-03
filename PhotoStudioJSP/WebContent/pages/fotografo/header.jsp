@@ -59,6 +59,13 @@
                 <li><a href="ListFotoServlet">Listar Fotos</a></li>
               </ul>
             </li> 
+            <li>
+             <a href="index.jsp">Encerrar Sessão</a>
+             </li>
+            <li>
+             <a ><b>Bem vindo, ${usuario}</b> - Perfil Fotografo</a>
+             </li>
+             
           </ul>
         </div><!--/.nav-collapse -->
       </div>
