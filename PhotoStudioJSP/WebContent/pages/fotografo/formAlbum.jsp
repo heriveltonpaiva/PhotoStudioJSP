@@ -6,10 +6,10 @@
   </div>
   <div class="panel-body">
 
- <form method="POST" action="../../AlbumServlet">
+ <form method="POST" action="AlbumServlet">
             Nome:
             <input type="text" name="descricao" value="" size="50" class="form-control" /><br>
-            Observação:
+            Observaï¿½ï¿½o:
             <textarea name="obs" rows="6" cols="34" class="form-control">
             </textarea><br>
             <input type="submit" value="Cadastrar" name="cadastrar"  class="btn btn-success" />

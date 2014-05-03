@@ -35,20 +35,20 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.jsp">Pagina Inicial</a></li>
+            <li class="active"><a href="index.jsp">Logout</a></li>
             
               <li class="dropdown">
-              <a href="cliente.jsp" class="dropdown-toggle" data-toggle="dropdown">Meus Fotografo<b class="caret"></b></a>
+              <a  class="dropdown-toggle" data-toggle="dropdown">Meus Fotografo<b class="caret"></b></a>
                <ul class="dropdown-menu">
-                <li><a href="formFotografo.jsp">Cadastrar Fotografo</a></li>
-                <li><a href="../../FotografoServlet">Listar Fotografo</a></li>
+                <li><a href="FotografoServlet">Cadastrar Fotografo</a></li>
+                <li><a href="ListFotografoServlet">Listar Fotografo</a></li>
               </ul>
             
             </li>
             <li class="dropdown">
-              <a href="album.jsp" class="dropdown-toggle" data-toggle="dropdown">Acesso Restrito<b class="caret"></b></a>
+              <a class="dropdown-toggle" data-toggle="dropdown">Acesso Restrito<b class="caret"></b></a>
              <ul class="dropdown-menu">
-                <li><a href="acesso.jsp">Alterar Login</a></li>
+                <li><a href="GestorServlet">Alterar Login</a></li>
               </ul>
             </li>	
           </ul>

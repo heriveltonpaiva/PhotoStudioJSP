@@ -15,6 +15,7 @@ import br.unirn.dominio.Contato;
 import br.unirn.dominio.Endereco;
 import br.unirn.dominio.Estado;
 import br.unirn.dominio.Fotografo;
+import br.unirn.dominio.Gestor;
 
 
 public class FotografoDao{
@@ -62,7 +63,7 @@ public class FotografoDao{
 		return result;
 	}
 	
-public void adicionarUsuario(Fotografo usuario, Endereco endereco, Bairro bairro, Cidade cidade, Estado estado, Contato contato) throws SQLException{
+public void adicionarUsuario(Fotografo usuario, Endereco endereco, Bairro bairro, Cidade cidade, Estado estado, Contato contato, Gestor gestor) throws SQLException{
 		
 		Contato novoContato = new Contato();
 		Estado novoEstado = new Estado();
@@ -70,7 +71,7 @@ public void adicionarUsuario(Fotografo usuario, Endereco endereco, Bairro bairro
 		Bairro novoBairro = new Bairro();
 		Endereco novoEndereco = new Endereco();
 		Fotografo novoUsuario = new Fotografo();
-		
+			
 		EstadoDao estadoDao = new EstadoDao();
 		CidadeDao cidadeDao = new CidadeDao();
 		BairroDao bairroDao = new BairroDao();
@@ -200,7 +201,6 @@ public void adicionarUsuario(Fotografo usuario, Endereco endereco, Bairro bairro
 			e1.printStackTrace();
 		}
 		
-		
 		// ADICIONANDO USU�RIO
 		novoUsuario.setNome(usuario.getNome());
 		novoUsuario.setCpfFotografo(usuario.getCpfFotografo());
@@ -208,7 +208,7 @@ public void adicionarUsuario(Fotografo usuario, Endereco endereco, Bairro bairro
 		novoUsuario.setLogin(usuario.getLogin());
 		novoUsuario.setSenha(usuario.getSenha());
 		novoUsuario.setIdContatoContato(novoContato);
-	        
+	    novoUsuario.setIdGestorGestor(gestor);
                 
 		 
 		try {
@@ -225,7 +225,7 @@ public void insert(Fotografo c) throws SQLException {
 
 	 //PREPARA CONEXÃO
 	   int id = getID();
-    String slq = "INSERT INTO fotografo(id_fotografo, nome, cpf_fotografo, login, senha, data_nascimento, id_contato_contato, id_endereco_endereco)VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+    String slq = "INSERT INTO fotografo(id_fotografo, nome, cpf_fotografo, login, senha, data_nascimento, id_contato_contato, id_endereco_endereco, id_gestor_gestor)VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
     
    
     PreparedStatement stmt = conexao.prepareStatement(slq);
@@ -240,6 +240,7 @@ public void insert(Fotografo c) throws SQLException {
     stmt.setDate(6, new Date(2004,12,12));
     stmt.setInt(7, c.getIdContatoContato().getIdContato());
     stmt.setInt(8, c.getIdEnderecoEndereco().getIdEndereco());
+    stmt.setInt(9, c.getIdGestorGestor().getIdGestor());
     c.setIdFotografo(id);
     
     //executa o codigo SQL
@@ -284,10 +285,7 @@ public List<Fotografo> findAll() throws SQLException {
 }
 
 
-public Object findById(Integer id) {
-	// TODO Auto-generated method stub
-	return null;
-}
+
 
     
 }

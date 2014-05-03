@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import br.unirn.dao.FotografoDao;
 import br.unirn.dominio.Bairro;
@@ -21,6 +22,7 @@ import br.unirn.dominio.Contato;
 import br.unirn.dominio.Endereco;
 import br.unirn.dominio.Estado;
 import br.unirn.dominio.Fotografo;
+import br.unirn.dominio.Gestor;
 
 /**
  * Servlet implementation class FotografoController
@@ -44,6 +46,8 @@ public class FotografoServlet extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
 	}
+	
+	
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -56,14 +60,16 @@ public class FotografoServlet extends HttpServlet {
 			e2.printStackTrace();
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("pages/gestor/listFotografo.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("pages/gestor/formFotografo.jsp");
 		dispatcher.forward(request, response);
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession session = request.getSession(false);
 		
+		String usuario = (String) session.getAttribute("usuario");
 		
 		//TABELA FOTOGRAFO
         String nome = request.getParameter("nome");
@@ -78,7 +84,7 @@ public class FotografoServlet extends HttpServlet {
         fotografo.setLogin(login);
         fotografo.setSenha(senha);
         
-        //TABELA ENDEREÇO
+        //TABELA ENDEREï¿½O
         
         String end = request.getParameter("end");
         int numero = Integer.parseInt(request.getParameter("num"));
@@ -123,10 +129,17 @@ public class FotografoServlet extends HttpServlet {
         contato.setEmail(email);
         contato.setTelefone(tel);
         
-        
+        Gestor gestor = new Gestor();
        
+        HttpSession sessao = request.getSession(false);
+        
+        int id_gestor =  (Integer) sessao.getAttribute("id_usuario");
+        
+        gestor.setIdGestor(id_gestor);
+        
+        
 			try {
-				fotografoDao.adicionarUsuario(fotografo, endereco, b, c, e, contato);
+				fotografoDao.adicionarUsuario(fotografo, endereco, b, c, e, contato, gestor);
 			} catch (SQLException e1) {
 				System.out.println("Erro:"+e1.getMessage()+"Causa"+e1.getCause());
 				e1.printStackTrace();
@@ -142,7 +155,7 @@ public class FotografoServlet extends HttpServlet {
 				e2.printStackTrace();
 			}
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("pages/gestor/listFotografo.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ListFotografoServlet");
 			dispatcher.forward(request, response);
 			
 	}

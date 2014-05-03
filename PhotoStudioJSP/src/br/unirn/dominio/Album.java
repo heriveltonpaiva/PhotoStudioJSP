@@ -22,6 +22,8 @@ public class Album  {
    
     private String obs;
   
+    private Integer idFotografo;
+    
     private Fotografo idFotografoFotografo;
     
 
@@ -77,6 +79,13 @@ public class Album  {
     public void setIdFotografoFotografo(Fotografo idFotografoFotografo) {
         this.idFotografoFotografo = idFotografoFotografo;
     }
+
+	public Integer setIdFotografo(Integer idFotografo) {
+		return this.idFotografo = idFotografo;
+	}
+	public Integer getIdFotografo() {
+		return idFotografo;
+	}
 
     
 

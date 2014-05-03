@@ -1,12 +1,14 @@
 package br.unirn.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unirn.dominio.Album;
 import br.unirn.dominio.Estado;
 
 public class EstadoDao  {
@@ -74,10 +76,19 @@ public class EstadoDao  {
 	}
 
 	
-	public void update(Estado entity) {
-		// TODO Auto-generated method stub
+	public void update(Estado estado) throws SQLException {
+		String sql = "update estado set descricao=? where id_estado=?";
 		
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setString(1, estado.getDescricao());
+			stmt.setInt(2, estado.getIdEstado());
+	
+			stmt.execute();
+			stmt.close();
+			
+			System.out.println("Alterado com sucesso");
 	}
+
 
 
 	public void delete(Estado entity) {

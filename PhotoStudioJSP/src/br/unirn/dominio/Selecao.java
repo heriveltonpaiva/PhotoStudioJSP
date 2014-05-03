@@ -6,9 +6,9 @@ public class Selecao {
 	private Integer quantidade;
 	private String tamanho;
 	private double valor_venda;
-	private Foto foto;
-	private Cliente cliente;
-	private Fotografo fotografo;
+	private Integer idfoto;
+	private Integer idcliente;
+	private Integer idfotografo;
 	
 	public Selecao() {
 		// TODO Auto-generated constructor stub
@@ -38,30 +38,35 @@ public class Selecao {
 		this.valor_venda = valor_venda;
 	}
 
-	public Foto getFoto() {
-		return foto;
+
+	public Integer getIdfoto() {
+		return idfoto;
 	}
 
-	public void setFoto(Foto foto) {
-		this.foto = foto;
+	public void setIdfoto(Integer idfoto) {
+		this.idfoto = idfoto;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public Integer getIdcliente() {
+		return idcliente;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setIdcliente(Integer idcliente) {
+		this.idcliente = idcliente;
 	}
 
-	public Fotografo getFotografo() {
-		return fotografo;
+	public Integer getIdfotografo() {
+		return idfotografo;
 	}
 
-	public void setFotografo(Fotografo fotografo) {
-		this.fotografo = fotografo;
+	public void setIdfotografo(Integer idfotografo) {
+		this.idfotografo = idfotografo;
 	}
-	
+
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+
 	public void setIdSelecao(Integer idSelecao) {
 		this.idSelecao = idSelecao;
 	}

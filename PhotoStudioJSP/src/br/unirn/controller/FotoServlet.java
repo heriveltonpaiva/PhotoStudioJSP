@@ -17,7 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import br.unirn.dao.AlbumDao;
 import br.unirn.dao.FotoDao;
+import br.unirn.dominio.Album;
 import br.unirn.dominio.Cliente;
 import br.unirn.dominio.Foto;
 
@@ -25,12 +27,12 @@ import br.unirn.dominio.Foto;
  * Servlet implementation class FotoServlet
  */
 @WebServlet("/FotoServlet")
-@MultipartConfig(maxFileSize = 2177215) /* Foto Tamanho Máximo 2MB */
+@MultipartConfig(maxFileSize = 2177215) /* Foto Tamanho Mï¿½ximo 2MB */
 public class FotoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	FotoDao dao = new FotoDao();
-	
+	AlbumDao albumDao = new AlbumDao();
     public FotoServlet() {
         super();
         // TODO Auto-generated constructor stub
@@ -47,20 +49,18 @@ public class FotoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-				
-		List<Foto> listaFotos;
-		try {
-			listaFotos = dao.findAll();
-
-			request.setAttribute("listaFotos", listaFotos);	        
-		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		
-		 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("pages/fotografo/listFoto.jsp");
+	 
+	    List<Album> listaAlbum;
+        try {
+            listaAlbum = albumDao.findAll();
+            request.setAttribute("listaAlbum", listaAlbum);         
+        } catch (SQLException e2) {
+            // TODO Auto-generated catch block
+            e2.printStackTrace();
+        }
+	    
+	    
+		RequestDispatcher dispatcher = request.getRequestDispatcher("pages/fotografo/formFoto.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -72,6 +72,11 @@ public class FotoServlet extends HttpServlet {
 		String descricao = request.getParameter("descricao");
 		String valor = request.getParameter("valor");
 		String obs = request.getParameter("obs");
+		
+		String id_album = request.getParameter("album");
+		
+		
+		
 		
 		 InputStream inputStream = null; // input stream of the upload file
          
@@ -97,6 +102,7 @@ public class FotoServlet extends HttpServlet {
 		foto.setDescricao(descricao);
 		foto.setObs(obs);
 		foto.setArquivo(inputStream);
+		foto.setIdAlbumAlbum(Integer.parseInt(id_album));
 	
 		try {
 			dao.insert(foto);
@@ -105,17 +111,8 @@ public class FotoServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	        }
-	        List<Foto> listaFotos;
-			try {
-				listaFotos = dao.findAll();
-
-				request.setAttribute("listaFotos", listaFotos);	        
-			} catch (SQLException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
-					
-			RequestDispatcher dispatcher = request.getRequestDispatcher("pages/fotografo/listFoto.jsp");
+	       	
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ListFotoServlet");
 			dispatcher.forward(request, response);
 	}
 }

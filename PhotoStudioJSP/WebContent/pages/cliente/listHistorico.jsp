@@ -2,64 +2,33 @@
 
 
 <div class="panel panel-default">
-  <!-- Default panel contents -->
-  <div class="panel-heading">Histórico de Compras</div>
-
+   <c:if test="${empty listaVendas}">
+	<h1>Não há Histórico de Compras</h1>
+</c:if>
   <!-- Table -->
+  <c:if test="${not empty listaVendas}">
   <table class="table">
-   <thead>
+  <thead>
                 <tr>
-                    <th>Descrição</th>
-                    <th>Valor </th>
-                    <th>Quantidade</th>
-                    <th>Tamanho</th>
-                    <th>Total</th>
-                    <th>Imagem</th>     
+                    <th>ID</th>
+                    <th>Descricao </th>
+                    <th>Data</th>
+                    <th>ID Seleção</th>            
                 </tr>
             </thead>
             <tbody>
+                  <c:forEach items="${listaVendas}" var="venda">
                 <tr>
-                    <td>Foto de Familia</td>
-                    <td>30,00</td>
-                    <td>2</td>
-                    <td>15x20</td>
-                    <td>60,00</td>
-                    <td> <img src="" width="100" height="100" alt="foto"/>
-                    </td>
-                                     
+                    <td>${venda.idVenda}</td>
+                    <td>${venda.descricao}</td>
+                    <td>${venda.dataVenda}</td>
+                   <td>${venda.selecao}</td>                                  
+                                         
                 </tr>
-                <tr>
-                    <td>Foto de Familia</td>
-                    <td>30,00</td>
-                    <td>2</td>
-                    <td>15x20</td>
-                    <td>60,00</td>
-                    <td> <img src="" width="100" height="100" alt="foto"/>
-                    </td>
-                                     
-                </tr>
-                <tr>
-                    <td>Foto de Familia</td>
-                    <td>30,00</td>
-                    <td>2</td>
-                    <td>15x20</td>
-                    <td>60,00</td>
-                    <td> <img src="" width="100" height="100" alt="foto"/>
-                    </td>
-                                     
-                </tr>
-                <tr>
-                    <td>Foto de Familia</td>
-                    <td>30,00</td>
-                    <td>2</td>
-                    <td>15x20</td>
-                    <td>60,00</td>
-                    <td> <img src="" width="100" height="100" alt="foto"/>
-                    </td>
-                                     
-                </tr>
+                </c:forEach>
             </tbody>
-  </table>
+    </table>
+    </c:if>
   <ul class="pager">
   <li><a href="#">Proximo</a></li>
   <li><a href="#">Anterior</a></li>

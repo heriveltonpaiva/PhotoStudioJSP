@@ -13,22 +13,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import br.unirn.dao.AlbumDao;
+import br.unirn.dao.FotoDao;
 import br.unirn.dominio.Album;
 import br.unirn.dominio.Cliente;
+import br.unirn.dominio.Foto;
 
 /**
  * Servlet implementation class AlbumController
  */
-@WebServlet("/AlbumServlet")
-public class AlbumServlet extends HttpServlet {
+@WebServlet("/ListAlbumClienteServlet")
+public class ListAlbumClienteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	AlbumDao dao = new AlbumDao();
+	FotoDao dao = new FotoDao();
 	
-    public AlbumServlet() {
+    public ListAlbumClienteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,8 +46,17 @@ public class AlbumServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	
-		RequestDispatcher dispatcher = request.getRequestDispatcher("pages/fotografo/formAlbum.jsp");
+		List<Foto> listaFotos;
+		try {
+			listaFotos = dao.findAll();
+
+			request.setAttribute("listaFotos", listaFotos);	        
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/cliente/listAlbum.jsp");
 		dispatcher.forward(request, response);
 		
 	}
@@ -56,41 +66,7 @@ public class AlbumServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String descricao = request.getParameter("descricao");
-		String obs = request.getParameter("obs");
-		
-		 HttpSession sessao = request.getSession(false);
-	        
-	        int id_fotografo =  (Integer) sessao.getAttribute("id_usuario");
-		
-		
-		Album album = new Album();
-		
-		album.setDescricao(descricao);
-		album.setData(new Date());
-		album.setObs(obs);
-		
-		
-		try {
-			dao.insert(album, id_fotografo);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		List<Album> listaAlbum;
-		try {
-			listaAlbum = dao.findAll();
-			request.setAttribute("listaAlbum", listaAlbum);	        
-		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/ListAlbumServlet");
-		dispatcher.forward(request, response);
-		}
-		
+	}
 	
 
 }

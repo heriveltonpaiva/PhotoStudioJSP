@@ -6,7 +6,7 @@
   </div>
   <div class="panel-body">
     
-    <form method="POST" action="../../Cliente">
+    <form method="POST" action="ClienteServlet">
      <div class="col-sm-5">
             Nome:
             <input type="text" name="nome" value="aaa" size="50" class="form-control"/>
@@ -16,11 +16,11 @@
             <input type="text" name="cpf" value="bbb" size="30" class="form-control" />
             </div>
             <div class="col-sm-4">
-            Endereço:
+            Endereï¿½o:
             <input type="text" name="end" value="ccccc" size="60" class="form-control"/>
              </div>
             <div class="col-sm-1">
-            N°:
+            Nï¿½:
             <input type="text" name="num" value="12" size="5" class="form-control"/>
              </div>
              

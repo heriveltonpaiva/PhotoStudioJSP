@@ -66,8 +66,8 @@ public class VendaDao {
 	       // SETANDO OS VALORES
 	       stmt.setInt(1, id);
 	       stmt.setString(2, v.getDescricao());
-	       stmt.setDate(3, new Date(1233,11,12));
-	       stmt.setInt(4, v.getSelecao().getIdSelecao());
+	       stmt.setDate(3, new Date(2014,12,12));
+	       stmt.setInt(4, v.getSelecao());
 	       
 	       v.setIdVenda(id);
 

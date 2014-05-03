@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unirn.dominio.Carrinho;
 import br.unirn.dominio.Contato;
 import br.unirn.dominio.Selecao;
 
@@ -69,9 +70,9 @@ public class SelecaoDao {
 	       stmt.setInt(2, s.getQuantidade());
 	       stmt.setString(3, s.getTamanho());
 	       stmt.setDouble(4, s.getValor_venda());
-	       stmt.setInt(5, s.getFoto().getIdFoto());
-	       stmt.setInt(6, s.getCliente().getIdCliente());
-	       stmt.setInt(7, s.getFotografo().getIdFotografo());
+	       stmt.setInt(5, s.getIdfoto());
+	       stmt.setInt(6, s.getIdcliente());
+	       stmt.setInt(7, s.getIdfotografo());
 	       s.setIdSelecao(id);
 
 	       //executa o codigo SQL
@@ -79,6 +80,18 @@ public class SelecaoDao {
 	       stmt.close();
 	}
 
+	public void adicionarSelecaoCarrinho(Selecao selecao, Carrinho carrinho) throws SQLException{
+			
+		this.insert(selecao);
+	
+		CarrinhoDao dao = new CarrinhoDao();
+		
+		carrinho.setSelecao(selecao.getIdSelecao());
+	
+		dao.insert(carrinho);
+	}
+	
+	
 	
 	public List<Selecao> findAll() throws SQLException {
 		String sql = "SELECT*FROM selecao";

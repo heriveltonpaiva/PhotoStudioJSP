@@ -22,7 +22,7 @@ public class Conexao {
 			return DriverManager.getConnection(url, username, password);
 
 		} catch (ClassNotFoundException e) {
-			System.out.println("Não Conectado no banco"+e.getMessage()+" "+e.getCause()+" "+e.getLocalizedMessage());
+			System.out.println("Nï¿½o Conectado no banco"+e.getMessage()+" "+e.getCause()+" "+e.getLocalizedMessage());
 
 			throw new SQLException(e.getMessage());
 		}

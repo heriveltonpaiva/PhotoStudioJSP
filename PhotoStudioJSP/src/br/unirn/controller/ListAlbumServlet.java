@@ -13,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import br.unirn.dao.AlbumDao;
 import br.unirn.dominio.Album;
@@ -22,13 +21,13 @@ import br.unirn.dominio.Cliente;
 /**
  * Servlet implementation class AlbumController
  */
-@WebServlet("/AlbumServlet")
-public class AlbumServlet extends HttpServlet {
+@WebServlet("/ListAlbumServlet")
+public class ListAlbumServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	AlbumDao dao = new AlbumDao();
 	
-    public AlbumServlet() {
+    public ListAlbumServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,39 +44,6 @@ public class AlbumServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	
-		RequestDispatcher dispatcher = request.getRequestDispatcher("pages/fotografo/formAlbum.jsp");
-		dispatcher.forward(request, response);
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String descricao = request.getParameter("descricao");
-		String obs = request.getParameter("obs");
-		
-		 HttpSession sessao = request.getSession(false);
-	        
-	        int id_fotografo =  (Integer) sessao.getAttribute("id_usuario");
-		
-		
-		Album album = new Album();
-		
-		album.setDescricao(descricao);
-		album.setData(new Date());
-		album.setObs(obs);
-		
-		
-		try {
-			dao.insert(album, id_fotografo);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		List<Album> listaAlbum;
 		try {
 			listaAlbum = dao.findAll();
@@ -87,10 +53,17 @@ public class AlbumServlet extends HttpServlet {
 			e2.printStackTrace();
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/ListAlbumServlet");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("pages/fotografo/listAlbum.jsp");
 		dispatcher.forward(request, response);
-		}
 		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
 	
 
 }

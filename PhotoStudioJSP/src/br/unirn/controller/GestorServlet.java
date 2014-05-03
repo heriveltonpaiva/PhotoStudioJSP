@@ -3,6 +3,7 @@ package br.unirn.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,17 +33,11 @@ public class GestorServlet extends HttpServlet {
 
 	}
 
-	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-		
-	}
-
+	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("pages/gestor/acesso.jsp");
+        dispatcher.forward(request, response);
 	}
 
 	/**

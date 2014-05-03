@@ -6,13 +6,13 @@
   </div>
   <div class="panel-body">
     
-    <form method="POST" action="../../GestorServlet">
+    <form method="POST" action="GestorServlet">
          Login:
             <input type="text" name="login" value="" size="30" class="form-control" /><br>
             Senha:
             <input type="password" name="senha" value="" size="30"  class="form-control"/><br>
             
-            <input type="submit" value="Salvar Alteração" name="cadastrar" class="btn btn-success"/>
+            <input type="submit" value="Salvar Alteraï¿½ï¿½o" name="cadastrar" class="btn btn-success"/>
         </form>  
    </div>
    </div> 

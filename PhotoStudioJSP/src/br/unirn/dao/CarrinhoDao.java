@@ -65,8 +65,8 @@ public class CarrinhoDao{
 
 	       // SETANDO OS VALORES
 	       stmt.setInt(1, id);
-	       stmt.setInt(2, c.getSelecao().getIdSelecao());
-	       stmt.setInt(3, c.getIdClienteCliente().getIdCliente());
+	       stmt.setInt(2, c.getSelecao());
+	       stmt.setInt(3, c.getIdClienteCliente());
 	   
 	       c.setIdCarrinho(id);
 
@@ -82,8 +82,11 @@ public class CarrinhoDao{
 	}
 
 	
-	public void delete(Object entity) {
-		// TODO Auto-generated method stub
+	public void delete(int idCarrinho) throws SQLException {
+		String  sql = "delete from carrinho where id_carrinho="+idCarrinho;
+		   PreparedStatement stmt = conexao.prepareStatement(sql);
+		   stmt.execute();
+		   stmt.close();
 		
 	}
 
@@ -99,7 +102,7 @@ public class CarrinhoDao{
             Carrinho c1 = new Carrinho();
             // pegando os objetos 
             c1.setIdCarrinho(rs.getInt("id_carrinho"));
-           
+            c1.setSelecao(rs.getInt("id_selecao_selecao"));
             Lista.add(c1);
         }
         rs.close();

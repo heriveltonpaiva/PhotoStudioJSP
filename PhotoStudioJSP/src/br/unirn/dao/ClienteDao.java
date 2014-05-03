@@ -14,6 +14,7 @@ import br.unirn.dominio.Cliente;
 import br.unirn.dominio.Contato;
 import br.unirn.dominio.Endereco;
 import br.unirn.dominio.Estado;
+import br.unirn.dominio.Fotografo;
 import br.unirn.dominio.Fotografocliente;
 
 public class ClienteDao{
@@ -106,7 +107,7 @@ public class ClienteDao{
  * @param contato
  * @throws SQLException 
  */
-public void adicionarUsuario(Cliente usuario, Endereco endereco, Bairro bairro, Cidade cidade, Estado estado, Contato contato) throws SQLException{
+public void adicionarUsuario(Cliente usuario, Endereco endereco, Bairro bairro, Cidade cidade, Estado estado, Contato contato, Fotografocliente fotografo) throws SQLException{
 		
 		Contato novoContato = new Contato();
 		Estado novoEstado = new Estado();
@@ -114,6 +115,7 @@ public void adicionarUsuario(Cliente usuario, Endereco endereco, Bairro bairro, 
 		Bairro novoBairro = new Bairro();
 		Endereco novoEndereco = new Endereco();
 		Cliente novoUsuario = new Cliente();
+	
 		
 		EstadoDao estadoDao = new EstadoDao();
 		CidadeDao cidadeDao = new CidadeDao();
@@ -252,11 +254,13 @@ public void adicionarUsuario(Cliente usuario, Endereco endereco, Bairro bairro, 
 		novoUsuario.setLogin(usuario.getLogin());
 		novoUsuario.setSenha(usuario.getSenha());
 		novoUsuario.setIdContatoContato(novoContato);
-	        
-                
+	    	
+		fotografo.setIdClienteCliente(novoUsuario);
+        
+        
 		 
 		try {
-			this.insert(novoUsuario);
+			this.insert(novoUsuario, fotografo);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -265,7 +269,7 @@ public void adicionarUsuario(Cliente usuario, Endereco endereco, Bairro bairro, 
 	}
 
 
-public void insert(Cliente c) throws SQLException {
+public void insert(Cliente c, Fotografocliente fc) throws SQLException {
 
 	 //PREPARA CONEXÃO
 	   int id = getID();
@@ -289,21 +293,21 @@ public void insert(Cliente c) throws SQLException {
     stmt.execute();
     stmt.close();
 	
-    /**
+    
     String sql ="INSERT INTO fotografocliente(id_fotografocliente, id_fotografo_fotografo, id_cliente_cliente)VALUES (?, ?, ?);";
     
-    PreparedStatement stmt2 = conexao.prepareStatement(slq);
+    PreparedStatement stmt2 = conexao.prepareStatement(sql);
     
-    Fotografocliente fc = new Fotografocliente();
+ 
     
 	stmt2.setInt(1, getIDFotografoCliente());
 	stmt2.setInt(2,fc.getIdFotografocliente());
-	stmt2.setInt(3, getID());
+	stmt2.setInt(3, id);
 	fc.setIdFotografocliente(getIDFotografoCliente());
 	
 	stmt2.execute();
 	stmt2.close();
-	*/
+	
 	
 }
 

@@ -88,7 +88,7 @@ public class FotoDao {
 	}
 	
 	public void insert(Foto f) throws SQLException {
-		 //PREPARA CONEXÃO
+		 //PREPARA CONEXï¿½O
 		   int id = getID();
 	    String slq = "INSERT INTO foto(id_foto, descricao, valor, arquivo, data_upload, obs, foto_nome, contenttype, id_album_album)VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 	            
@@ -104,7 +104,7 @@ public class FotoDao {
 	    stmt.setString(6, f.getObs());
 	    stmt.setString(7, f.getFotoNome());
 	    stmt.setString(8, f.getContenttype());
-	    stmt.setInt(9, 10);
+	    stmt.setInt(9, f.getIdAlbumAlbum());
 	   
 	    f.setIdFoto(id);
 
@@ -151,11 +151,6 @@ public class FotoDao {
 	}
 
 	
-	public Object findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public File getFile( int id ){
 	    //busca uma conexao com o banco
 	    File f = null;
@@ -167,9 +162,10 @@ public class FotoDao {
 	            byte [] bytes = rs.getBytes("arquivo");
 	            String nome = rs.getString("foto_nome");
 	            String content = rs.getString("contenttype");
-	 
+	            
+	            String caminho = "C:\\Users\\HERIVELTON\\git\\PhotoStudioJSP\\PhotoStudioJSP\\WebContent\\images\\";
 	            //converte o array de bytes em file
-	            f = new File( "C:\\Users\\HERIVELTON\\git\\PhotoStudioJSP\\PhotoStudioJSP\\WebContent\\images\\" + nome +id+".jpg");
+	            f = new File( caminho + nome +id+".jpg");
 	            FileOutputStream fos = new FileOutputStream( f);
 	            fos.write( bytes );
 	            fos.close();

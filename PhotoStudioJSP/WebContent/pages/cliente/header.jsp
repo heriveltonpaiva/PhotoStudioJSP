@@ -38,13 +38,13 @@
             <li class="active"><a href="index.jsp">Pagina Inicial</a></li>
              
 			<li class="dropdown">
-              <a href="../../FotoServlet" >Visualizar Albuns</a>
+              <a href="ListAlbumClienteServlet" >Visualizar Albuns</a>
             </li>
 			<li class="dropdown">
-              <a href="listCarrinho.jsp" >Meu Carrinho</a>
+              <a href="ListCarrinhoServlet" >Meu Carrinho</a>
             </li>
             <li class="dropdown">
-              <a href="listHistorico.jsp" >Meu Histórico</a>
+              <a href="ListHistoricoServlet" >Meu Historico</a>
             </li>
           </ul>
           

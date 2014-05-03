@@ -45,36 +45,27 @@ public class LoginServlet extends HttpServlet {
     
     }
     
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-		
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+	    
+	    HttpSession sessao = request.getSession(true);
 		
+	    
+	    
 		String nome = request.getParameter("login");
 		String senha = request.getParameter("senha");
 		
        
 		if(nome.equals("") && senha.equals("")){
 		
-			System.out.println("Nome do Usuário e senha vazio");
+			System.out.println("Nome do Usuï¿½rio e senha vazio");
 			
 		}else{
 		
 		/*
-		 * VERIFICAR SE O LOGIN E SENHA É DE UM GESTOR	
+		 * VERIFICAR SE O LOGIN E SENHA ï¿½ DE UM GESTOR	
 		 */
 			
 		try {
@@ -82,6 +73,9 @@ public class LoginServlet extends HttpServlet {
 				
 				if(g.getLogin().equals(nome) && g.getSenha().equals(senha)){
 					
+				    
+				    sessao.setAttribute("usuario", g.getLogin());
+			        sessao.setAttribute("id_usuario", g.getIdGestor());
 			
 					RequestDispatcher dispatcher = request.getRequestDispatcher("pages/gestor/index.jsp");
 					dispatcher.forward(request, response);
@@ -101,13 +95,16 @@ public class LoginServlet extends HttpServlet {
 		
 			
 		/*
-		 * VERIFICAR SE O LOGIN E SENHA É DE UM FOTOGRAFO
+		 * VERIFICAR SE O LOGIN E SENHA ï¿½ DE UM FOTOGRAFO
 		 */
 		
 		try {
 			for (Fotografo f : fotografoDao.findAll()) {
 				
 				if(f.getLogin().equals(nome) && f.getSenha().equals(senha)){
+					
+				    sessao.setAttribute("usuario", f.getNome());
+                    sessao.setAttribute("id_usuario", f.getIdFotografo());
 					
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/fotografo/index.jsp");
 					dispatcher.forward(request, response);
@@ -123,7 +120,7 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		/*
-		 * VERIFICAR SE O LOGIN E SENHA É DE UM CLIENTE
+		 * VERIFICAR SE O LOGIN E SENHA ï¿½ DE UM CLIENTE
 		 */
 		
 			try {
@@ -131,8 +128,11 @@ public class LoginServlet extends HttpServlet {
 
 					if (c.getLogin().equals(nome) && c.getSenha().equals(senha)) {
 
-						RequestDispatcher dispatcher = request
-								.getRequestDispatcher("pages/cliente/index.jsp");
+					    
+					    sessao.setAttribute("usuario", c.getNome());
+	                    sessao.setAttribute("id_usuario", c.getIdCliente());
+					    
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/cliente/index.jsp");
 						dispatcher.forward(request, response);
 
 					}

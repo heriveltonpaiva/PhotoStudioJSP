@@ -10,6 +10,7 @@ import java.util.List;
 
 import br.unirn.dominio.Album;
 import br.unirn.dominio.Cliente;
+import br.unirn.dominio.Fotografo;
 
 public class AlbumDao   {
 	private Connection conexao;
@@ -53,8 +54,8 @@ public class AlbumDao   {
 		return result;
 	}
 
-	public void insert(Album album) throws SQLException {
-		//PREPARA CONEXÃO
+	public void insert(Album album, Integer idFotografo) throws SQLException {
+		//PREPARA CONEXï¿½O
 		   int id = getID();
 	       String slq = "INSERT INTO album(id_album, descricao, data, obs, id_fotografo_fotografo) VALUES (?, ?, ?, ?, ?);";
 	               
@@ -67,7 +68,7 @@ public class AlbumDao   {
 	       stmt.setDate(3, new Date(2004,12,12));
 	       stmt.setString(4, album.getObs());
 	       //TEM QUE TER O FOTOGRAFO PARA CADASTRAR O ALBUM
-	       stmt.setInt(5, 3);
+	       stmt.setInt(5, idFotografo);
 	       album.setIdAlbum(id);
 
 	       //executa o codigo SQL
@@ -88,6 +89,19 @@ public class AlbumDao   {
 		
 	}
 
+	public Integer findByIdFoto(Integer id) throws SQLException {
+
+		String sql ="Select a.id_fotografo_fotografo from album as a INNER JOIN foto as f ON f.id_album_album = id_album where f.id_foto="+id;
+		
+		PreparedStatement stmt = this.conexao.prepareStatement(sql);
+	    ResultSet rs = stmt.executeQuery();	    
+	    Album c = new Album();
+	    Integer idFotografo= null;
+	   while(rs.next()){
+	   idFotografo =  c.setIdFotografo(rs.getInt("id_fotografo_fotografo"));
+	   }
+		return idFotografo;
+	}
 	
 	public List<Album> findAll() throws SQLException {
 		String sql = "SELECT*FROM album";
@@ -108,13 +122,6 @@ public class AlbumDao   {
 	     stmt.close();
 		return Lista;
 	}
-
-	
-	public Object findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
     
     
 }

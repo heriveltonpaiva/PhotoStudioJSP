@@ -1,12 +1,14 @@
 package br.unirn.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unirn.dominio.Album;
 import br.unirn.dominio.Endereco;
 import br.unirn.dominio.Estado;
 
@@ -76,10 +78,23 @@ public class EnderecoDao {
 	}
 
 	
-	public void update(Object entity) {
-		// TODO Auto-generated method stub
+	public void update(Endereco endereco) throws SQLException {
+		String sql = "update endereco set descricao=?, numero=?, cep=?, complemento=?, id_bairro_bairro=? where id_endereco=?";
 		
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setString(1, endereco.getDescricao());
+			stmt.setInt(2, endereco.getNumero());
+			stmt.setString(3, endereco.getCep());
+			stmt.setString(4, endereco.getComplemento());
+			stmt.setInt(5, endereco.getIdBairroBairro().getIdBairro());
+			stmt.setInt(6, endereco.getIdEndereco());
+	
+			stmt.execute();
+			stmt.close();
+			
+			System.out.println("Alterado com sucesso");
 	}
+
 
 	
 	public void delete(Object entity) {

@@ -14,8 +14,8 @@ public class Carrinho  {
   
    
     private Integer idCarrinho;
-    private Selecao selecao;  
-    private Cliente idClienteCliente;
+    private Integer selecao;  
+    private Integer idClienteCliente;
 
     public Carrinho() {
     }
@@ -37,20 +37,19 @@ public class Carrinho  {
         this.idCarrinho = idCarrinho;
     }
 
-   public Selecao getSelecao() {
+   public Integer getIdClienteCliente() {
+	return idClienteCliente;
+}
+   public void setIdClienteCliente(Integer idClienteCliente) {
+	this.idClienteCliente = idClienteCliente;
+}
+   public Integer getSelecao() {
 	return selecao;
 }
-   public void setSelecao(Selecao selecao) {
+   
+   public void setSelecao(Integer selecao) {
 	this.selecao = selecao;
 }
-
-    public Cliente getIdClienteCliente() {
-        return idClienteCliente;
-    }
-
-    public void setIdClienteCliente(Cliente idClienteCliente) {
-        this.idClienteCliente = idClienteCliente;
-    }
 
     @Override
     public int hashCode() {

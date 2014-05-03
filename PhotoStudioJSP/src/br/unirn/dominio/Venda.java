@@ -24,7 +24,7 @@ public class Venda  {
     
     private Date dataVenda;
    
-    private Selecao selecao; 
+    private Integer selecao; 
     
     public Venda() {
     }
@@ -63,10 +63,10 @@ public class Venda  {
         this.dataVenda = dataVenda;
     }
 
-   public Selecao getSelecao() {
+  public Integer getSelecao() {
 	return selecao;
 }
-   public void setSelecao(Selecao selecao) {
+  public void setSelecao(Integer selecao) {
 	this.selecao = selecao;
 }
 

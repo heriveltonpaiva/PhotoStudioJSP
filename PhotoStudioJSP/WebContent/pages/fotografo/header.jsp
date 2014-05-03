@@ -35,28 +35,28 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.jsp">Pagina Inicial</a></li>
+            <li class="active"><a href="/pages/fotografo/index.jsp">Pagina Inicial</a></li>
             
               <li class="dropdown">
-              <a href="cliente.jsp" class="dropdown-toggle" data-toggle="dropdown">Meus Clientes<b class="caret"></b></a>
+              <a  class="dropdown-toggle" data-toggle="dropdown">Meus Clientes<b class="caret"></b></a>
                <ul class="dropdown-menu">
-                <li><a href="formCliente.jsp">Cadastrar Cliente</a></li>
-                <li><a href="../../Cliente">Listar Cliente</a></li>
+                <li><a href="ClienteServlet">Cadastrar Cliente</a></li>
+                <li><a href="ListClienteServlet">Listar Cliente</a></li>
               </ul>
             
             </li>
             <li class="dropdown">
-              <a href="album.jsp" class="dropdown-toggle" data-toggle="dropdown">Meus Albuns<b class="caret"></b></a>
+              <a  class="dropdown-toggle" data-toggle="dropdown">Meus Albuns<b class="caret"></b></a>
              <ul class="dropdown-menu">
-                <li><a href="formAlbum.jsp">Cadastrar Album</a></li>
-                <li><a href="../../AlbumServlet">Listar Albuns</a></li>
+                <li><a href="AlbumServlet">Cadastrar Album</a></li>
+                <li><a href="ListAlbumServlet">Listar Albuns</a></li>
               </ul>
             </li>	
             <li class="dropdown">
-              <a href="foto.jsp" class="dropdown-toggle" data-toggle="dropdown">Minhas Fotos<b class="caret"></b></a>
+              <a class="dropdown-toggle" data-toggle="dropdown">Minhas Fotos<b class="caret"></b></a>
             <ul class="dropdown-menu">
-                <li><a href="formFoto.jsp">Cadastrar Fotos</a></li>
-                <li><a href="../../FotoServlet">Listar Fotos</a></li>
+                <li><a href="FotoServlet">Cadastrar Fotos</a></li>
+                <li><a href="ListFotoServlet">Listar Fotos</a></li>
               </ul>
             </li> 
           </ul>
