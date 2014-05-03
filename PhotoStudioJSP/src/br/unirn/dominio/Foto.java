@@ -7,6 +7,7 @@
 package br.unirn.dominio;
 
 import java.io.InputStream;
+import java.sql.Date;
 
 
 

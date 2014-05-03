@@ -77,9 +77,20 @@ public class AlbumDao   {
 	}
 
 	
-	public void update(Object entity) {
-		// TODO Auto-generated method stub
+	public void update(Album album) throws SQLException {
+		String sql = "update album set descricao=?,data=?,obs=?,id_fotografo_fotografo=? where id_album=?";
 		
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setString(1, album.getDescricao());
+			stmt.setDate(2, (Date) album.getData());
+			stmt.setString(3, album.getObs());
+			stmt.setInt(4, album.getIdFotografoFotografo().getIdFotografo());
+			stmt.setInt(5, album.getIdAlbum());
+	
+			stmt.execute();
+			stmt.close();
+			
+			System.out.println("Alterado com sucesso");
 	}
 
 	

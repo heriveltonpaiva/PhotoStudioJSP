@@ -1,12 +1,14 @@
 package br.unirn.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unirn.dominio.Album;
 import br.unirn.dominio.Contato;
 import br.unirn.dominio.Selecao;
 
@@ -77,6 +79,26 @@ public class SelecaoDao {
 	       //executa o codigo SQL
 	       stmt.execute();
 	       stmt.close();
+	}
+
+	
+	public void update(Selecao selecao) throws SQLException {
+		String sql = "update selecao set quantidade=?, tamanho=?, valor_venda=?, " +
+	       		"id_foto_foto=?, id_cliente_cliente=?, id_fotografo_fotografo=? where id_selecao=?";
+		
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setInt(1, selecao.getQuantidade());
+			stmt.setString(2, selecao.getTamanho());
+			stmt.setDouble(3,selecao.getValor_venda());
+			stmt.setInt(4, selecao.getFoto().getIdFoto());
+			stmt.setInt(5, selecao.getCliente().getIdCliente());
+			stmt.setInt(6, selecao.getFotografo().getIdFotografo());
+			stmt.setInt(7, selecao.getIdSelecao());
+	
+			stmt.execute();
+			stmt.close();
+			
+			System.out.println("Alterado com sucesso");
 	}
 
 	

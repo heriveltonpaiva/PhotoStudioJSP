@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unirn.dominio.Album;
 import br.unirn.dominio.Carrinho;
 import br.unirn.dominio.Venda;
 
@@ -74,6 +75,21 @@ public class VendaDao {
 	       //executa o codigo SQL
 	       stmt.execute();
 	       stmt.close();
+	}
+
+	public void update(Venda venda) throws SQLException {
+		String sql = "update venda set descricao=?, data_venda=?, id_selecao_selecao=? where id_venda=?";
+		
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setString(1, venda.getDescricao());
+			stmt.setDate(2, (Date) venda.getDataVenda());
+			stmt.setInt(3, venda.getSelecao().getIdSelecao());
+			stmt.setInt(4, venda.getIdVenda());
+	
+			stmt.execute();
+			stmt.close();
+			
+			System.out.println("Alterado com sucesso");
 	}
 
 	

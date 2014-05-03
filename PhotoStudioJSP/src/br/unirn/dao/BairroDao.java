@@ -1,12 +1,14 @@
 package br.unirn.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unirn.dominio.Album;
 import br.unirn.dominio.Bairro;
 import br.unirn.dominio.Estado;
 
@@ -75,9 +77,18 @@ public class BairroDao {
 	}
 
 	
-	public void update(Object entity) {
-		// TODO Auto-generated method stub
+	public void update(Bairro bairro) throws SQLException {
+		String sql = "update bairro set descricao=?,id_cidade_cidade=? where id_bairro=?";
 		
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setString(1, bairro.getDescricao());
+			stmt.setInt(2, bairro.getIdCidadeCidade().getIdCidade());
+			stmt.setInt(3, bairro.getIdBairro());
+	
+			stmt.execute();
+			stmt.close();
+			
+			System.out.println("Alterado com sucesso");
 	}
 
 	

@@ -1,12 +1,14 @@
 package br.unirn.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unirn.dominio.Album;
 import br.unirn.dominio.Carrinho;
 import br.unirn.dominio.Contato;
 
@@ -76,9 +78,18 @@ public class CarrinhoDao{
 	}
 
 	
-	public void update(Object entity) {
-		// TODO Auto-generated method stub
+	public void update(Carrinho carrinho) throws SQLException {
+		String sql = "update carrinho set id_selecao_selecao=?, id_cliente_cliente=? where id_carrinho=?";
 		
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setInt(1, carrinho.getSelecao().getIdSelecao());
+			stmt.setInt(2, carrinho.getIdClienteCliente().getIdCliente());
+			stmt.setInt(3, carrinho.getIdCarrinho());
+			
+			stmt.execute();
+			stmt.close();
+			
+			System.out.println("Alterado com sucesso");
 	}
 
 	

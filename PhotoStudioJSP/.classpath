@@ -13,7 +13,9 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jstl-1.2.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/postgresql-9.3-1101.jdbc3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/John/Desktop/affz/jjj/javax.servlet.jsp.jstl-1.2.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/John/Desktop/affz/jjj/javax.servlet.jsp.jstl-api-1.2.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/John/Desktop/affz/jjj/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/John/Desktop/affz/jjj/postgresql-9.2-1004.jdbc4.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

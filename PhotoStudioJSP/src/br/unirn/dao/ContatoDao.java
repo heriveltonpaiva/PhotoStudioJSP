@@ -1,12 +1,14 @@
 package br.unirn.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unirn.dominio.Album;
 import br.unirn.dominio.Contato;
 import br.unirn.dominio.Estado;
 
@@ -75,9 +77,19 @@ public class ContatoDao{
 	}
 
 	
-	public void update(Object entity) {
-		// TODO Auto-generated method stub
+	public void update(Contato contato) throws SQLException {
+		String sql = "update contato set telefone=?, celular=?, email=? where id_contato=?";
 		
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setString(1, contato.getTelefone());
+			stmt.setString(2, contato.getCelular());
+			stmt.setString(3, contato.getEmail());
+			stmt.setInt(4, contato.getIdContato());
+			
+			stmt.execute();
+			stmt.close();
+			
+			System.out.println("Alterado com sucesso");
 	}
 
 	public void delete(Object entity) {

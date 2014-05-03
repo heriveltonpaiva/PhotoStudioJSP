@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unirn.dominio.Album;
 import br.unirn.dominio.Foto;
 
 public class FotoDao {
@@ -113,10 +114,26 @@ public class FotoDao {
 	    stmt.close();
 	}
 
-	public void update(Object entity) {
-		// TODO Auto-generated method stub
+	public void update(Foto foto) throws SQLException {
+		String sql = "update foto set descricao=?, valor=?, arquivo=?, data_upload=?, obs=?, foto_nome=?, contenttype=?, id_album_album=? where id_foto=?";
 		
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setString(1, foto.getDescricao());
+			stmt.setDouble(2,foto.getValor());
+			stmt.setBytes(3,this.convertInputStreamToByteArray(foto.getArquivo()));
+			stmt.setString(4, foto.getDataUpload());
+			stmt.setString(5, foto.getObs());
+			stmt.setString(6, foto.getFotoNome());
+			stmt.setString(7, foto.getContenttype());
+			stmt.setInt(8, foto.getIdAlbumAlbum());
+			stmt.setInt(9, foto.getIdFoto());
+			
+			stmt.execute();
+			stmt.close();
+			
+			System.out.println("Alterado com sucesso");
 	}
+
 
 	
 	public void delete(Object entity) {
