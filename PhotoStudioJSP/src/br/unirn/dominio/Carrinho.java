@@ -15,6 +15,7 @@ public class Carrinho  {
    
     private Integer idCarrinho;
     private Integer selecao;  
+    private Selecao idSelecaoSelecao;
     private Integer idClienteCliente;
 
     public Carrinho() {
@@ -49,6 +50,12 @@ public class Carrinho  {
    
    public void setSelecao(Integer selecao) {
 	this.selecao = selecao;
+}
+   public Selecao getIdSelecaoSelecao() {
+	return idSelecaoSelecao;
+}
+   public void setIdSelecaoSelecao(Selecao idSelecaoSelecao) {
+	this.idSelecaoSelecao = idSelecaoSelecao;
 }
 
     @Override

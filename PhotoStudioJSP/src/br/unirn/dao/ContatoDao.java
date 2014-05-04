@@ -120,9 +120,25 @@ public class ContatoDao{
 	}
 
 	
-	public Object findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Contato findById(Integer id) throws SQLException {
+		String sql = "SELECT*FROM contato WHERE id_contato="+id;
+        PreparedStatement stmt = this.conexao.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        // criando arraylist 
+        Contato c1 = null;
+        while (rs.next()) {
+            // estanciando 
+            c1 = new Contato();
+            // pegando os objetos 
+            c1.setIdContato(rs.getInt("id_contato"));
+            c1.setTelefone(rs.getString("telefone"));
+            c1.setCelular(rs.getString("celular"));
+            c1.setEmail(rs.getString("email"));
+            
+        }
+        rs.close();
+        stmt.close();
+	return c1;
 	}
 
 }

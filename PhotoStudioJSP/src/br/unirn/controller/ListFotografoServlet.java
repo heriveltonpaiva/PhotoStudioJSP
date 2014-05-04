@@ -47,9 +47,15 @@ public class ListFotografoServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String id = request.getParameter("id");
+		String op = request.getParameter("op");
+		
+		
+		
+		if(op==null){
 		List<Fotografo> listaFotografo;
 		try {
-			listaFotografo = fotografoDao.findAll();
+			listaFotografo = fotografoDao.findAllFotografo();
 			request.setAttribute("listaFotografo", listaFotografo);	        
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
@@ -58,6 +64,23 @@ public class ListFotografoServlet extends HttpServlet {
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("pages/gestor/listFotografo.jsp");
 		dispatcher.forward(request, response);
+	
+	}else if(op.equals("e")){
+		
+		try {
+			fotografoDao.delete(Integer.parseInt(id));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("pages/gestor/formFotografo.jsp");
+		dispatcher.forward(request, response);		
+	}
+		
 	}
 
 	

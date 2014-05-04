@@ -2,6 +2,8 @@ package br.unirn.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -59,38 +61,40 @@ public class AlbumServlet extends HttpServlet {
 		String descricao = request.getParameter("descricao");
 		String obs = request.getParameter("obs");
 		
+		 if(descricao.equals("")&& obs.equals("")){
+			 
+			 request.setAttribute("mensagem","Preencha os Campos Obrigatórios"); 
+			 
+			 RequestDispatcher dispatcher = request.getRequestDispatcher("pages/fotografo/formAlbum.jsp");
+		     dispatcher.forward(request, response);
+		 }else{
+		
 		 HttpSession sessao = request.getSession(false);
 	        
 	        int id_fotografo =  (Integer) sessao.getAttribute("id_usuario");
 		
-		
+	        Date data = new Date();
 		Album album = new Album();
 		
-		album.setDescricao(descricao);
-		album.setData(new Date());
+		album.setDescricao(descricao);		
+		album.setData(data);
 		album.setObs(obs);
 		
 		
 		try {
 			dao.insert(album, id_fotografo);
+			request.setAttribute("mensagem","Registro Inserido com Sucesso !!!"); 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		List<Album> listaAlbum;
-		try {
-			listaAlbum = dao.findAll();
-			request.setAttribute("listaAlbum", listaAlbum);	        
-		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
+		
+		
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/ListAlbumServlet");
-		dispatcher.forward(request, response);
-		}
 		
+	}
 	
 
 }

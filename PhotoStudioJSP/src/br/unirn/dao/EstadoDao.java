@@ -117,9 +117,24 @@ public class EstadoDao  {
 		return Lista;
 	}
 
-	public Estado findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Estado findById(Integer id) throws SQLException {
+		 String sql = "SELECT*FROM estado WHERE id_estado="+id;
+	        PreparedStatement stmt = this.conexao.prepareStatement(sql);
+	        ResultSet rs = stmt.executeQuery();
+	        // criando arraylist 
+	        Estado c1=null;
+	        while (rs.next()) {
+	            // estanciando 
+	             c1 = new Estado();
+	            // pegando os objetos 
+             c1.setIdEstado(rs.getInt("id_estado"));
+	            c1.setDescricao(rs.getString("descricao"));
+	            
+	          
+	        }
+	        rs.close();
+	        stmt.close();
+		return c1;
 	}
 
 	

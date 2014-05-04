@@ -82,8 +82,8 @@ public class CarrinhoDao{
 		String sql = "update carrinho set id_selecao_selecao=?, id_cliente_cliente=? where id_carrinho=?";
 		
 			PreparedStatement stmt = conexao.prepareStatement(sql);
-			stmt.setInt(1, carrinho.getSelecao().getIdSelecao());
-			stmt.setInt(2, carrinho.getIdClienteCliente().getIdCliente());
+			stmt.setInt(1, carrinho.getSelecao());
+			stmt.setInt(2, carrinho.getIdClienteCliente());
 			stmt.setInt(3, carrinho.getIdCarrinho());
 			
 			stmt.execute();
@@ -120,7 +120,27 @@ public class CarrinhoDao{
         stmt.close();
 	return Lista;
 	}
-
+ 
+	public List<Carrinho> findAllCarrinho() throws SQLException {
+		String sql = "SELECT*FROM carrinho";
+        PreparedStatement stmt = this.conexao.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        SelecaoDao sel = new SelecaoDao();
+        // criando arraylist 
+        List<Carrinho> Lista = new ArrayList<Carrinho>();
+        while (rs.next()) {
+            // estanciando 
+            Carrinho c1 = new Carrinho();
+            // pegando os objetos 
+            c1.setIdCarrinho(rs.getInt("id_carrinho"));
+            c1.setSelecao(rs.getInt("id_selecao_selecao"));
+            c1.setIdSelecaoSelecao(sel.findById(Integer.parseInt(rs.getString("id_selecao_selecao"))));
+            Lista.add(c1);
+        }
+        rs.close();
+        stmt.close();
+	return Lista;
+	}
 	
 	public Object findById(Integer id) {
 		// TODO Auto-generated method stub

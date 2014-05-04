@@ -127,9 +127,28 @@ public class EnderecoDao {
 	}
 
 	
-	public Object findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Endereco findById(Integer id) throws SQLException {
+		String sql = "SELECT*FROM endereco WHERE id_endereco="+id;
+        PreparedStatement stmt = this.conexao.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        BairroDao dao = new BairroDao();
+        Endereco c1 =null;
+        while (rs.next()) {
+            // estanciando 
+             c1 = new Endereco();
+             
+            // pegando os objetos 
+            
+            c1.setIdEndereco(rs.getInt("id_endereco"));
+            c1.setDescricao(rs.getString("descricao"));
+            c1.setCep(rs.getString("cep"));
+            c1.setNumero(rs.getInt("numero"));
+            c1.setComplemento(rs.getString("complemento"));
+            c1.setIdBairroBairro(dao.findById(Integer.parseInt(rs.getString("id_bairro_bairro"))));
+        }
+        rs.close();
+        stmt.close();
+	return c1;
 	}
 
 	

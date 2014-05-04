@@ -332,9 +332,11 @@ public void update(Cliente cliente) throws SQLException {
 }
 
 
-public void delete(Object entity) {
-	// TODO Auto-generated method stub
-	
+public void delete(Integer id) throws SQLException {
+	String sql = "DELETE FROM cliente WHERE id_cliente="+id;
+	  PreparedStatement stmt = conexao.prepareStatement(sql);
+	   stmt.execute();
+	   stmt.close();
 }
 
 
@@ -360,6 +362,31 @@ public List<Cliente> findAll() throws SQLException {
 	return Lista;
 }
 
+public List<Cliente> findAllCliente() throws SQLException{
+	 String sql = "SELECT*FROM cliente";
+    PreparedStatement stmt = this.conexao.prepareStatement(sql);
+    ResultSet rs = stmt.executeQuery();
+    // criando arraylist 
+    EnderecoDao end = new EnderecoDao();
+    ContatoDao contato = new ContatoDao();
+    List<Cliente> Lista = new ArrayList<Cliente>();
+    while (rs.next()) {
+        // estanciando 
+        Cliente c1 = new Cliente();
+        // pegando os objetos 
+        c1.setIdCliente(rs.getInt("id_cliente"));
+        c1.setNome(rs.getString("nome"));
+        c1.setLogin(rs.getString("login"));
+        c1.setSenha(rs.getString("senha"));
+        c1.setCpf(rs.getString("cpf"));
+        c1.setIdEnderecoEndereco(end.findById(Integer.parseInt(rs.getString("id_endereco_endereco"))));
+        c1.setIdContatoContato(contato.findById(Integer.parseInt(rs.getString("id_contato_contato"))));
+        Lista.add(c1);
+    }
+    rs.close();
+    stmt.close();
+	return Lista;
+}
 
 public Object findById(Integer id) {
 	// TODO Auto-generated method stub

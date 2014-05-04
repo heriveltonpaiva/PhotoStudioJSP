@@ -12,19 +12,23 @@
   <table class="table">
   <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>ID Selecao </th>
-                    <th>ID Cliente</th>
-                    <th></th>            
+                    <th>Nome da Foto</th>
+                    <th>Valor R$</th>
+                    <th>Observação</th>
+                    <th>Quantidade</th> 
+                    <th>Tamanho</th> 
+                    <th>Total R$</th>        
                 </tr>
             </thead>
             <tbody>
                   <c:forEach items="${listaCarro}" var="car">
                 <tr>
-                    <td>${car.idCarrinho}</td>
-                    <td>${car.selecao}</td>
-                    <td>${car.idClienteCliente}</td>
-                   
+                    <td>${car.idSelecaoSelecao.idFotoFoto.descricao}</td> 
+                    <td>${car.idSelecaoSelecao.idFotoFoto.valor}</td> 
+                    <td>${car.idSelecaoSelecao.idFotoFoto.obs}</td>
+                    <td>${car.idSelecaoSelecao.quantidade}</td>
+                    <td>${car.idSelecaoSelecao.tamanho}</td>
+                    <td>${car.idSelecaoSelecao.valor_venda}</td>
                                   
                      
                      <td> <a href="">Visualizar</a><br><a href="">Alterar</a> <br> <a href="">Excluir</a> </td>

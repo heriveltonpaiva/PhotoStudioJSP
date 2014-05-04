@@ -70,7 +70,7 @@ public class ListHistoricoServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		Date data = new Date();
 		     
 		try {
 			for (Carrinho car : carrinhoDao.findAll()) {
@@ -78,7 +78,7 @@ public class ListHistoricoServlet extends HttpServlet {
 				Venda v = new Venda();
 				
 				v.setDescricao("Vendido");
-				v.setDataVenda(new Date());
+				v.setDataVenda(data);
 				v.setSelecao(car.getSelecao());
 				
 				vendaDao.insert(v);

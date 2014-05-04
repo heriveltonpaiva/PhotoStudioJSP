@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import br.unirn.dominio.Album;
@@ -65,7 +65,7 @@ public class AlbumDao   {
 	       // SETANDO OS VALORES
 	       stmt.setInt(1, id);
 	       stmt.setString(2, album.getDescricao());
-	       stmt.setDate(3, new Date(2004,12,12));
+	       stmt.setDate(3, new java.sql.Date(album.getData().getTime()));
 	       stmt.setString(4, album.getObs());
 	       //TEM QUE TER O FOTOGRAFO PARA CADASTRAR O ALBUM
 	       stmt.setInt(5, idFotografo);
@@ -83,7 +83,6 @@ public class AlbumDao   {
 		
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			stmt.setString(1, album.getDescricao());
-			stmt.setDate(2, (Date) album.getData());
 			stmt.setString(3, album.getObs());
 			stmt.setInt(4, album.getIdFotografoFotografo().getIdFotografo());
 			stmt.setInt(5, album.getIdAlbum());
@@ -95,9 +94,11 @@ public class AlbumDao   {
 	}
 
 	
-	public void delete(Object entity) {
-		// TODO Auto-generated method stub
-		
+	public void delete(Integer id) throws SQLException {
+		String sql = "DELETE FROM album WHERE id_album="+id;
+		  PreparedStatement stmt = conexao.prepareStatement(sql);
+		   stmt.execute();
+		   stmt.close();
 	}
 
 	public Integer findByIdFoto(Integer id) throws SQLException {
@@ -126,12 +127,34 @@ public class AlbumDao   {
 	         // pegando os objetos 
 	         c1.setIdAlbum(rs.getInt("id_album"));
 	         c1.setDescricao(rs.getString("descricao"));
+	         c1.setData(rs.getDate("data"));
 	         c1.setObs(rs.getString("obs"));
 	         Lista.add(c1);
 	     }
 	     rs.close();
 	     stmt.close();
 		return Lista;
+	}
+	
+	public Album findById(Integer id) throws SQLException {
+		String sql = "SELECT*FROM album WHERE id_album="+id;
+	     PreparedStatement stmt = this.conexao.prepareStatement(sql);
+	     ResultSet rs = stmt.executeQuery();
+	     // criando arraylist 
+	     Album c1=null;
+	     while (rs.next()) {
+	         // estanciando 
+	          c1 = new Album();
+	         // pegando os objetos 
+	         c1.setIdAlbum(rs.getInt("id_album"));
+	         c1.setDescricao(rs.getString("descricao"));
+	         c1.setData(rs.getDate("data"));
+	         c1.setObs(rs.getString("obs"));
+	       
+	     }
+	     rs.close();
+	     stmt.close();
+		return c1;
 	}
     
     

@@ -28,7 +28,7 @@ public class ListAlbumClienteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	FotoDao dao = new FotoDao();
-	
+	AlbumDao albumDao = new AlbumDao();
     public ListAlbumClienteServlet() {
         super();
         // TODO Auto-generated constructor stub
@@ -46,15 +46,20 @@ public class ListAlbumClienteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		List<Foto> listaFotos;
-		try {
-			listaFotos = dao.findAll();
+		
+		
+		List<Album> listaAlbum;
+        try {
+            listaAlbum = albumDao.findAll();
+            request.setAttribute("listaAlbum", listaAlbum);         
+        } catch (SQLException e2) {
+            // TODO Auto-generated catch block
+            e2.printStackTrace();
+        }
+			
 
-			request.setAttribute("listaFotos", listaFotos);	        
-		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
+		       
+		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/cliente/listAlbum.jsp");
 		dispatcher.forward(request, response);
@@ -65,6 +70,34 @@ public class ListAlbumClienteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		List<Album> listaAlbum;
+        try {
+            listaAlbum = albumDao.findAll();
+            request.setAttribute("listaAlbum", listaAlbum);         
+        } catch (SQLException e2) {
+            // TODO Auto-generated catch block
+            e2.printStackTrace();
+        }
+        
+		
+		
+		String id_album = request.getParameter("album");
+		
+		List<Foto> listaFotos;
+		try {
+			listaFotos = dao.findAllByIdAlbum(Integer.parseInt(id_album));
+
+			request.setAttribute("listaFotos", listaFotos);	        
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher("pages/cliente/listAlbum.jsp");
+		dispatcher.forward(request, response);
+					
+		
+		
 		
 	}
 	

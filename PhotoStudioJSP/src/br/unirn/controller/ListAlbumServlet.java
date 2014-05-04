@@ -43,7 +43,12 @@ public class ListAlbumServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
+		String op = request.getParameter("op");
 		
+		request.setAttribute("op", op);
+		
+		if(op==null){
 		List<Album> listaAlbum;
 		try {
 			listaAlbum = dao.findAll();
@@ -55,7 +60,47 @@ public class ListAlbumServlet extends HttpServlet {
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("pages/fotografo/listAlbum.jsp");
 		dispatcher.forward(request, response);
-		
+		}else if(op.equals("e")){
+			
+			try {
+				dao.delete(Integer.parseInt(id));
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("pages/fotografo/listAlbum.jsp");
+			dispatcher.forward(request, response);
+		}else if(op.equals("a")){
+			
+			
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("pages/fotografo/formAlbum.jsp");
+			try {
+				Album ab = dao.findById(Integer.parseInt(id));
+				
+				request.setAttribute("desc", ab.getDescricao());
+				request.setAttribute("obser", ab.getObs());
+				
+				
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+			
+			dispatcher.forward(request, response);
+			
+			
+		}
 	}
 
 	/**

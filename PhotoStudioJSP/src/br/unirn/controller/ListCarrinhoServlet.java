@@ -54,7 +54,7 @@ public class ListCarrinhoServlet extends HttpServlet {
 				
 		List<Carrinho> listaCarro;
 		try {
-			listaCarro = dao.findAll();
+			listaCarro = dao.findAllCarrinho();
 
 			request.setAttribute("listaCarro", listaCarro);	        
 		} catch (SQLException e2) {

@@ -119,9 +119,26 @@ public class BairroDao {
 	}
 
 	
-	public Object findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Bairro findById(Integer id) throws SQLException {
+		
+			 String sql = "SELECT*FROM bairro WHERE id_bairro="+id;
+		        PreparedStatement stmt = this.conexao.prepareStatement(sql);
+		        ResultSet rs = stmt.executeQuery();
+		        CidadeDao dao = new CidadeDao();
+		        // criando arraylist 
+		        Bairro c1=null;
+		        while (rs.next()) {
+		            // estanciando 
+		             c1 = new Bairro();
+		            // pegando os objetos 
+	                c1.setIdBairro(rs.getInt("id_bairro"));
+		            c1.setDescricao(rs.getString("descricao"));
+		            c1.setIdCidadeCidade(dao.findById(Integer.parseInt(rs.getString("id_cidade_cidade"))));		            
+		        }
+		        rs.close();
+		        stmt.close();
+			return c1;
+	
 	}
 
 	

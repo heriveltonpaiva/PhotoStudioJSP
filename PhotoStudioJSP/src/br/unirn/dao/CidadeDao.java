@@ -111,7 +111,26 @@ public class CidadeDao  {
 		return Lista;
 	}
 
-
+	public Cidade findById(Integer id) throws SQLException {
+		 String sql = "SELECT*FROM cidade WHERE id_cidade="+id;
+	        PreparedStatement stmt = this.conexao.prepareStatement(sql);
+	        ResultSet rs = stmt.executeQuery();
+	        EstadoDao dao = new EstadoDao();
+	        // criando arraylist 
+	        Cidade c1=null;
+	        while (rs.next()) {
+	            // estanciando 
+	            c1 = new Cidade();
+	            // pegando os objetos 
+                c1.setIdCidade(rs.getInt("id_cidade"));
+	            c1.setDescricao(rs.getString("descricao"));
+	            c1.setIdEstadoEstado(dao.findById(Integer.parseInt(rs.getString("id_estado_estado"))));
+	            
+	        }
+	        rs.close();
+	        stmt.close();
+		return c1;
+	}
 	
 	
 	

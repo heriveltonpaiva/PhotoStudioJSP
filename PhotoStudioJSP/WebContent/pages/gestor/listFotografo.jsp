@@ -23,6 +23,7 @@
                     <th>Endereço</th>
                     <th>Bairro</th>
                     <th>Cidade</th>
+                    <th>UF</th>
                     <th>Telefone</th>
                     <th>Celular</th>
                     <th>Ações</th>
@@ -34,13 +35,14 @@
                     <td>${fotografo.idFotografo}</td>
                     <td>${fotografo.nome}</td>
                     <td>${fotografo.cpfFotografo}</td>
-                    <td>${fotografo.idEnderecoEndereco} </td>
+                    <td>${fotografo.idEnderecoEndereco.descricao} </td>
                     
-                    <td>${fotografo.idEnderecoEndereco}</td>
-                    <td>${fotografo.idEnderecoEndereco}</td>
-                    <td>${fotografo.idContatoContato}</td>
-                    <td>${fotografo.idContatoContato}</td>
-                      <td> <a href="">Visualizar</a><br><a href="">Alterar</a> <br> <a href="">Excluir</a> </td>
+                    <td>${fotografo.idEnderecoEndereco.idBairroBairro.descricao}</td>
+                    <td>${fotografo.idEnderecoEndereco.idBairroBairro.idCidadeCidade.descricao}</td>
+                    <td>${fotografo.idEnderecoEndereco.idBairroBairro.idCidadeCidade.idEstadoEstado.descricao}</td>
+                    <td>${fotografo.idContatoContato.telefone}</td>
+                    <td>${fotografo.idContatoContato.celular}</td>
+                      <td> <a href="">Visualizar</a><br><a href="">Alterar</a> <br> <a href="ListFotografoServlet?op=e&id=${fotografo.idFotografo}">Excluir</a> </td>
                 </tr>
                 </c:forEach>
                 

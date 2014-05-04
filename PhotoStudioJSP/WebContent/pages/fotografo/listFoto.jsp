@@ -5,7 +5,7 @@
 <div class="panel-heading">Album de Fotos</div>
 <div class="panel-body">
  
-  <form method="POST" action=""> 
+  <form method="POST" action="ListFotoServlet"> 
 <div class="col-sm-3">
          
             <select name="album" class="form-control" style="margin-top: 20px;">
@@ -37,6 +37,7 @@
                 <tr>
                     <th>Nome</th>
                     <th>Valor </th>
+                    <th>Data Upload </th>
                     <th>Observação</th>
                     <th>Imagem</th>
                     <th>Ações</th>                  
@@ -45,11 +46,12 @@
             <tbody>
                   <c:forEach items="${listaFotos}" var="foto">
                 <tr>
-                    <td>${foto.idFoto}</td>
+                    <td>${foto.descricao}</td>
                     <td>${foto.valor}</td>
+                    <td>${foto.dataUpload}</td>
                     <td>${foto.obs}</td>
                     <td><img src="images/photo${foto.idFoto}.jpg"  width="200" height="200"/></td>
-                      <td> <a href="">Visualizar</a><br><a href="">Alterar</a> <br> <a href="">Excluir</a> </td>
+                      <td><a href="ListFotoServlet?op=a&id=${foto.idFoto}">Alterar</a> <br> <a href="ListFotoServlet?op=e&id=${foto.idFoto}">Excluir</a> </td>
                 </tr>
                 </c:forEach>
             </tbody>

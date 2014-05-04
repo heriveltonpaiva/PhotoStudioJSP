@@ -1,10 +1,13 @@
 package br.unirn.dao;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -12,6 +15,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.sun.image.codec.jpeg.JPEGCodec;
+import com.sun.image.codec.jpeg.JPEGImageDecoder;
+import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 import br.unirn.dominio.Album;
 import br.unirn.dominio.Foto;
@@ -101,7 +108,8 @@ public class FotoDao {
 	    stmt.setString(2, f.getDescricao());
 	    stmt.setDouble(3,f.getValor());
 	    stmt.setBytes(4, this.convertInputStreamToByteArray(f.getArquivo()));
-	    stmt.setDate(5, new Date(2004,12,12));
+	    stmt.setString(5, f.getDataUpload().toString());
+	    //stmt.setDate(3, new java.sql.Date(f.getDataUpload().getTime()));
 	    stmt.setString(6, f.getObs());
 	    stmt.setString(7, f.getFotoNome());
 	    stmt.setString(8, f.getContenttype());
@@ -136,9 +144,11 @@ public class FotoDao {
 
 
 	
-	public void delete(Object entity) {
-		// TODO Auto-generated method stub
-		
+	public void delete(Integer id) throws SQLException {
+		String sql = "DELETE FROM foto WHERE id_foto="+id;
+		  PreparedStatement stmt = conexao.prepareStatement(sql);
+		   stmt.execute();
+		   stmt.close();
 	}
 
 	
@@ -157,6 +167,9 @@ public class FotoDao {
 	           f.setValor(rs.getDouble("valor"));
 	           f.setArquivo(rs.getBinaryStream("arquivo"));
 	           f.setFotoNome(rs.getString("foto_nome"));
+	           //data string
+	         //stmt.setDate(3, new java.sql.Date(f.getDataUpload().getTime()));
+	           f.setDataUpload(rs.getString("data_upload"));
 	           f.setObs(rs.getString("obs"));
 	           f.setContenttype(rs.getString("contenttype"));
 	           this.getFile(f.getIdFoto());
@@ -165,6 +178,63 @@ public class FotoDao {
 	        rs.close();
 	        stmt.close();
 		return Lista;
+	}
+	
+	
+	    
+	
+	
+	public List<Foto> findAllByIdAlbum(Integer id) throws SQLException {
+		 String sql = "SELECT*FROM foto WHERE id_album_album ="+id;
+	        PreparedStatement stmt = this.conexao.prepareStatement(sql);
+	        ResultSet rs = stmt.executeQuery();
+	        // criando arraylist 
+	        List<Foto> Lista = new ArrayList<Foto>();
+	        while (rs.next()) {
+	            // estanciando 
+	            Foto f = new Foto();
+	            // pegando os objetos 
+              f.setIdFoto(rs.getInt("id_foto"));
+	           f.setDescricao(rs.getString("descricao"));
+	           f.setValor(rs.getDouble("valor"));
+	           f.setArquivo(rs.getBinaryStream("arquivo"));
+	           f.setFotoNome(rs.getString("foto_nome"));
+	           //data string
+	         //stmt.setDate(3, new java.sql.Date(f.getDataUpload().getTime()));
+	           f.setDataUpload(rs.getString("data_upload"));
+	           f.setObs(rs.getString("obs"));
+	           f.setContenttype(rs.getString("contenttype"));
+	           this.getFile(f.getIdFoto());
+	            Lista.add(f);
+	        }
+	        rs.close();
+	        stmt.close();
+		return Lista;
+	}
+	
+	public Foto findById(Integer id) throws SQLException {
+		 String sql = "SELECT*FROM foto WHERE id_foto="+id;
+	        PreparedStatement stmt = this.conexao.prepareStatement(sql);
+	        ResultSet rs = stmt.executeQuery();
+	        // criando arraylist 
+	        Foto f = null;
+	        while (rs.next()) {
+	            // estanciando 
+	             f = new Foto();
+	            // pegando os objetos 
+              f.setIdFoto(rs.getInt("id_foto"));
+	           f.setDescricao(rs.getString("descricao"));
+	           f.setValor(rs.getDouble("valor"));
+	           f.setArquivo(rs.getBinaryStream("arquivo"));
+	           f.setFotoNome(rs.getString("foto_nome"));
+	           f.setObs(rs.getString("obs"));
+	           f.setContenttype(rs.getString("contenttype"));
+	           this.getFile(f.getIdFoto());
+	          
+	        }
+	        rs.close();
+	        stmt.close();
+		return f;
 	}
 
 	

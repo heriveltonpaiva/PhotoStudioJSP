@@ -10,20 +10,25 @@
   <table class="table">
   <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Descricao </th>
-                    <th>Data</th>
-                    <th>ID Seleção</th>            
+                     <th>Venda</th>
+                    <th>Nome da Foto</th>                  
+                    <th>Quantidade</th>
+                    <th>Tamanho</th> 
+                    <th>Total R$</th>
+                    <th>Observação </th>
+                    <th>Data da Venda</th>               
                 </tr>
             </thead>
             <tbody>
                   <c:forEach items="${listaVendas}" var="venda">
                 <tr>
-                    <td>${venda.idVenda}</td>
-                    <td>${venda.descricao}</td>
-                    <td>${venda.dataVenda}</td>
-                   <td>${venda.selecao}</td>                                  
-                                         
+                    <td>${venda.descricao}</td> 
+                    <td>${venda.idSelecaoSelecao.idFotoFoto.descricao}</td>                 
+                    <td>${venda.idSelecaoSelecao.quantidade}</td>
+                    <td>${venda.idSelecaoSelecao.tamanho}</td>
+                    <td>${venda.idSelecaoSelecao.valor_venda}</td>    
+                    <td>${venda.idSelecaoSelecao.idFotoFoto.obs}</td>                              
+                    <td>${venda.dataVenda}</td>                       
                 </tr>
                 </c:forEach>
             </tbody>

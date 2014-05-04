@@ -67,7 +67,7 @@ public class VendaDao {
 	       // SETANDO OS VALORES
 	       stmt.setInt(1, id);
 	       stmt.setString(2, v.getDescricao());
-	       stmt.setDate(3, new Date(2014,12,12));
+	       stmt.setDate(3, new java.sql.Date(v.getDataVenda().getTime()));
 	       stmt.setInt(4, v.getSelecao());
 	       
 	       v.setIdVenda(id);
@@ -83,7 +83,7 @@ public class VendaDao {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			stmt.setString(1, venda.getDescricao());
 			stmt.setDate(2, (Date) venda.getDataVenda());
-			stmt.setInt(3, venda.getSelecao().getIdSelecao());
+			stmt.setInt(3, venda.getSelecao());
 			stmt.setInt(4, venda.getIdVenda());
 	
 			stmt.execute();
@@ -97,6 +97,7 @@ public class VendaDao {
 		String sql = "SELECT*FROM venda";
         PreparedStatement stmt = this.conexao.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
+        SelecaoDao dao = new SelecaoDao();
         // criando arraylist 
         List<Venda> Lista = new ArrayList<Venda>();
         while (rs.next()) {
@@ -105,7 +106,8 @@ public class VendaDao {
             // pegando os objetos 
             v.setIdVenda(rs.getInt("id_venda"));
             v.setDescricao(rs.getString("descricao"));
-            
+            v.setDataVenda(new java.sql.Date(v.getDataVenda().getTime()));
+            v.setIdSelecaoSelecao(dao.findById(Integer.parseInt(rs.getString("id_selecao_selecao"))));
             Lista.add(v);
         }
         rs.close();

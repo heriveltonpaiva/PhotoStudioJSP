@@ -7,7 +7,7 @@
 
   <div class="panel-heading">Lista de Albuns</div>
 
-<form action="" method="POST">
+<form action="ListAlbumClienteServlet" method="POST">
 
 <div class="col-sm-3">
            
@@ -26,7 +26,7 @@
 </form>
 
 <c:if test="${empty listaFotos}">
-	<h1>Lista vazia</h1>
+<h1>Album sem Fotos</h1>
 </c:if>
   <!-- Table -->
   <c:if test="${not empty listaFotos}">

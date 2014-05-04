@@ -26,6 +26,8 @@ public class Venda  {
    
     private Integer selecao; 
     
+    private Selecao idSelecaoSelecao;
+    
     public Venda() {
     }
 
@@ -70,5 +72,11 @@ public class Venda  {
 	this.selecao = selecao;
 }
 
+  public Selecao getIdSelecaoSelecao() {
+	return idSelecaoSelecao;
+}
+  public void setIdSelecaoSelecao(Selecao idSelecaoSelecao) {
+	this.idSelecaoSelecao = idSelecaoSelecao;
+}
     
 }

@@ -14,6 +14,7 @@
   <table class="table">
   <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Nome</th>
                     <th>Data de Criação</th>
                     <th>Observação</th>
@@ -26,9 +27,10 @@
                 <tr>
                     <td>${album.idAlbum}</td>
                     <td>${album.descricao}</td>
+                    <td>${album.data}</td>                   
                     <td>${album.obs}</td>
                     
-                      <td> <a href="">Visualizar</a><br><a href="">Alterar</a> <br> <a href="">Excluir</a> </td>
+                      <td><a href="ListAlbumServlet?op=a&id=${album.idAlbum}">Alterar</a> <br> <a href="ListAlbumServlet?op=e&id=${album.idAlbum}">Excluir</a> </td>
                 </tr>
                 </c:forEach>
             </tbody>

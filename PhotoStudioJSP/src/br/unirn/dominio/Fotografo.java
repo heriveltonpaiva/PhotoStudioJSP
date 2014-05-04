@@ -32,6 +32,8 @@ public class Fotografo  {
     private Date dataNascimento;
    
     private Gestor idGestorGestor;
+       
+    private Integer idEndereco;
     
     private Endereco idEnderecoEndereco;
     
@@ -44,13 +46,14 @@ public class Fotografo  {
         this.idFotografo = idFotografo;
     }
 
-    public Fotografo(Integer idFotografo, String nome, String cpfFotografo, String login, String senha, Date dataNascimento) {
+    public Fotografo(Integer idFotografo, String nome, String cpfFotografo, String login, String senha, Date dataNascimento, Integer idEndereco) {
         this.idFotografo = idFotografo;
         this.nome = nome;
         this.cpfFotografo = cpfFotografo;
         this.login = login;
         this.senha = senha;
         this.dataNascimento = dataNascimento;
+        this.idEndereco = idEndereco;
     }
 
     public Integer getIdFotografo() {
@@ -101,8 +104,12 @@ public class Fotografo  {
         this.dataNascimento = dataNascimento;
     }
 
-  
-
+   public Integer getIdEndereco() {
+	return idEndereco;
+}
+   public void setIdEndereco(Integer idEndereco) {
+	this.idEndereco = idEndereco;
+}
     public Gestor getIdGestorGestor() {
         return idGestorGestor;
     }
@@ -127,7 +134,17 @@ public class Fotografo  {
         this.idContatoContato = idContatoContato;
     }
 
+    
 
+	@Override
+	public String toString() {
+		return "Fotografo [idFotografo=" + idFotografo + ", nome=" + nome
+				+ ", cpfFotografo=" + cpfFotografo + ", login=" + login
+				+ ", senha=" + senha + ", dataNascimento=" + dataNascimento
+				+ ", idGestorGestor=" + idGestorGestor
+				+ ", idEnderecoEndereco=" + idEnderecoEndereco
+				+ ", idContatoContato=" + idContatoContato + "]";
+	}
    
     
 }

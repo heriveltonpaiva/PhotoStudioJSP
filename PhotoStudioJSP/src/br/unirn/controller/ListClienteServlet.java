@@ -51,10 +51,15 @@ public class ListClienteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
+		String op = request.getParameter("op");
 		
+		
+		
+		if(op==null){
 		List<Cliente> listaCliente;
 		try {
-			listaCliente = dao.findAll();
+			listaCliente = dao.findAllCliente();
 			request.setAttribute("listaCliente", listaCliente);	        
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
@@ -63,7 +68,21 @@ public class ListClienteServlet extends HttpServlet {
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("pages/fotografo/listCliente.jsp");
 		dispatcher.forward(request, response);
-		
+		}else if(op.equals("e")){
+			
+			try {
+				dao.delete(Integer.parseInt(id));
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			RequestDispatcher dispatcher = request.getRequestDispatcher("pages/fotografo/listCliente.jsp");
+			dispatcher.forward(request, response);
+			
+		}
 	}
 
 	/**

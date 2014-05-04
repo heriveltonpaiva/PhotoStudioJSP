@@ -21,6 +21,7 @@
                     <th>Endereço</th>
                     <th>Bairro</th>
                     <th>Cidade</th>
+                    <th>UF</th>
                     <th>Telefone</th>
                     <th>Celular</th>
                     <th>Ações</th>
@@ -32,13 +33,13 @@
                     <td>${cli.idCliente}</td>
                     <td>${cli.nome}</td>
                     <td>${cli.cpf}</td>
-                    <td>${cli.idEnderecoEndereco} </td>
-                    
-                    <td>${cli.idEnderecoEndereco}</td>
-                    <td>${cli.idEnderecoEndereco}</td>
-                    <td>${cli.idContatoContato}</td>
-                    <td>${cli.idContatoContato}</td>
-                      <td> <a href="">Visualizar</a><br><a href="">Alterar</a> <br> <a href="">Excluir</a> </td>
+                    <td>${cli.idEnderecoEndereco.descricao} </td>                  
+                    <td>${cli.idEnderecoEndereco.idBairroBairro.descricao}</td>
+                    <td>${cli.idEnderecoEndereco.idBairroBairro.idCidadeCidade.descricao}</td>                    
+                    <td>${cli.idEnderecoEndereco.idBairroBairro.idCidadeCidade.idEstadoEstado.descricao}</td>
+                    <td>${cli.idContatoContato.telefone}</td>
+                    <td>${cli.idContatoContato.celular}</td>
+                      <td> <a href="">Visualizar</a><br><a href="">Alterar</a> <br> <a href="ListClienteServlet?op=e&id=${cli.idCliente}">Excluir</a> </td>
                 </tr>
                 </c:forEach>
             

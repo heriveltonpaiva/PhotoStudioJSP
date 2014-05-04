@@ -9,20 +9,21 @@
 <form method="POST" action="FotoServlet" enctype="multipart/form-data">
             <div class="col-sm-3">
             Nome:
-            <input type="text" name="descricao" value="" size="50" class="form-control"/>
+            <input type="text" name="descricao" value="${desc}" size="50" class="form-control"/>
             </div>
             <div class="col-sm-1">
             Valor:
-            <input type="text" name="valor" value="" size="15" class="form-control"/>
+            <input type="text" name="valor" value="${valor}" size="15" class="form-control"/>
             </div>
             <div class="col-sm-6">
             Observaï¿½ï¿½o:
-            <input type="text" name="obs" class="form-control">
+            <input type="text" name="obs" value="${obs}" class="form-control">
+            
            
             </div>
             <div class="col-sm-3">
             Arquivo:
-            <input type="file" name="photo" value="" size="30" />
+            <input type="file" name="photo"  size="30" />
            </div>
            <div class="col-sm-3">
             Escolha um Album:
@@ -33,10 +34,17 @@
                </c:forEach>
             </select><br>
             </div> 
-            <div class="col-sm-2">      
-            <input type="submit" value="Cadastrar" name="cadastrar" class="btn btn-success" style="margin-top: 20px;" />
+            <div class="col-sm-2"> 
+             <c:if test="${op eq 'a'}">
+             <input type="submit" value="Salvar Alteração" name="alterar"  class="btn btn-success" style="margin-top: 20px;" />
+            </c:if>
+            <c:if test="${op != 'a'}">
+            <input type="submit" value="Cadastrar" name="cadastrar"  class="btn btn-success" style="margin-top: 20px;"/>
              <input type="reset" value="Limpar" name="cadastrar" class="btn btn-warning" style="margin-top: 20px;" />
-            </div>
+         
+       ${mensagem}
+        </c:if>
+         </div>
         </form>
 
 </div>

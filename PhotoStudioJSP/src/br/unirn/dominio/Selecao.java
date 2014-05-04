@@ -9,6 +9,7 @@ public class Selecao {
 	private Integer idfoto;
 	private Integer idcliente;
 	private Integer idfotografo;
+	private Foto idFotoFoto;
 	
 	public Selecao() {
 		// TODO Auto-generated constructor stub
@@ -74,5 +75,10 @@ public class Selecao {
 	public Integer getIdSelecao() {
 		return idSelecao;
 	}
-	
+	public void setIdFotoFoto(Foto idFotoFoto) {
+		this.idFotoFoto = idFotoFoto;
+	}
+	public Foto getIdFotoFoto() {
+		return idFotoFoto;
+	}
 }

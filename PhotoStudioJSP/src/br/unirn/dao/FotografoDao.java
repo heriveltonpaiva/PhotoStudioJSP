@@ -272,17 +272,21 @@ public void update(Fotografo fotografo) throws SQLException {
 
 
 
-public void delete(Object entity) {
-	// TODO Auto-generated method stub
+public void delete(Integer id) throws SQLException {
+	String sql = "DELETE FROM fotografo WHERE id_fotografo="+id;
+	  PreparedStatement stmt = conexao.prepareStatement(sql);
+	   stmt.execute();
+	   stmt.close();
 	
 }
 
-
-public List<Fotografo> findAll() throws SQLException {
+public List<Fotografo> findAllFotografo() throws SQLException{
 	 String sql = "SELECT*FROM fotografo";
      PreparedStatement stmt = this.conexao.prepareStatement(sql);
      ResultSet rs = stmt.executeQuery();
      // criando arraylist 
+     EnderecoDao end = new EnderecoDao();
+     ContatoDao contato = new ContatoDao();
      List<Fotografo> Lista = new ArrayList<Fotografo>();
      while (rs.next()) {
          // estanciando 
@@ -293,6 +297,33 @@ public List<Fotografo> findAll() throws SQLException {
          c1.setLogin(rs.getString("login"));
          c1.setSenha(rs.getString("senha"));
          c1.setCpfFotografo(rs.getString("cpf_fotografo"));
+         c1.setIdEnderecoEndereco(end.findById(Integer.parseInt(rs.getString("id_endereco_endereco"))));
+         c1.setIdContatoContato(contato.findById(Integer.parseInt(rs.getString("id_contato_contato"))));
+         Lista.add(c1);
+     }
+     rs.close();
+     stmt.close();
+	return Lista;
+}
+
+
+public List<Fotografo> findAll() throws SQLException {
+	 String sql = "SELECT*FROM fotografo";
+     PreparedStatement stmt = this.conexao.prepareStatement(sql);
+     ResultSet rs = stmt.executeQuery();
+     // criando arraylist 
+     EnderecoDao end = new EnderecoDao();
+     List<Fotografo> Lista = new ArrayList<Fotografo>();
+     while (rs.next()) {
+         // estanciando 
+         Fotografo c1 = new Fotografo();
+         // pegando os objetos 
+         c1.setIdFotografo(rs.getInt("id_fotografo"));
+         c1.setNome(rs.getString("nome"));
+         c1.setLogin(rs.getString("login"));
+         c1.setSenha(rs.getString("senha"));
+         c1.setCpfFotografo(rs.getString("cpf_fotografo"));
+         c1.setIdEnderecoEndereco(end.findById(Integer.parseInt(rs.getString("id_endereco_endereco"))));
          Lista.add(c1);
      }
      rs.close();

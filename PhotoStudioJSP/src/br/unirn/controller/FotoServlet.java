@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -103,7 +106,12 @@ public class FotoServlet extends HttpServlet {
 		foto.setObs(obs);
 		foto.setArquivo(inputStream);
 		foto.setIdAlbumAlbum(Integer.parseInt(id_album));
-	
+		
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = new Date(); 		
+	    foto.setDataUpload(dateFormat.format(date));
+		
+		
 		try {
 			dao.insert(foto);
 		} catch (SQLException e) {
