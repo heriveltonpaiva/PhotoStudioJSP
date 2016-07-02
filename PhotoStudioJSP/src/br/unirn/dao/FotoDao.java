@@ -1,26 +1,17 @@
 package br.unirn.dao;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageDecoder;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
-
-import br.unirn.dominio.Album;
 import br.unirn.dominio.Foto;
 
 public class FotoDao {
@@ -248,8 +239,6 @@ public class FotoDao {
 	        if ( rs.next() ){
 	            byte [] bytes = rs.getBytes("arquivo");
 	            String nome = rs.getString("foto_nome");
-	            String content = rs.getString("contenttype");
-	            
 	            String caminho = "C:\\Users\\HERIVELTON\\git\\PhotoStudioJSP\\PhotoStudioJSP\\WebContent\\images\\";
 	            //converte o array de bytes em file
 	            f = new File( caminho + nome +id+".jpg");

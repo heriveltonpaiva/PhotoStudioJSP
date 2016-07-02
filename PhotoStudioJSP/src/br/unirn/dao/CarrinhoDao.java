@@ -1,16 +1,14 @@
 package br.unirn.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.unirn.dominio.Album;
 import br.unirn.dominio.Carrinho;
-import br.unirn.dominio.Contato;
+import br.unirn.dominio.Selecao;
 
 public class CarrinhoDao{
 	private Connection conexao;
@@ -58,7 +56,7 @@ public class CarrinhoDao{
 	}
 	
 	public void insert(Carrinho c) throws SQLException {
-		//PREPARA CONEXÃO
+		//PREPARA CONEXï¿½O
 		   int id = getID();
 	       String slq = "INSERT INTO carrinho(id_carrinho, id_selecao_selecao, id_cliente_cliente)VALUES (?, ?, ?);";
 	               
@@ -134,7 +132,7 @@ public class CarrinhoDao{
             // pegando os objetos 
             c1.setIdCarrinho(rs.getInt("id_carrinho"));
             c1.setSelecao(rs.getInt("id_selecao_selecao"));
-            c1.setIdSelecaoSelecao(sel.findById(Integer.parseInt(rs.getString("id_selecao_selecao"))));
+            c1.setIdSelecaoSelecao((Selecao)sel.findById(Integer.parseInt(rs.getString("id_selecao_selecao"))));
             Lista.add(c1);
         }
         rs.close();

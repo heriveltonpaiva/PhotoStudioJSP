@@ -17,10 +17,8 @@ import javax.servlet.http.HttpSession;
 
 import br.unirn.dao.AlbumDao;
 import br.unirn.dao.CarrinhoDao;
-import br.unirn.dao.FotoDao;
 import br.unirn.dao.SelecaoDao;
 import br.unirn.dominio.Carrinho;
-import br.unirn.dominio.Foto;
 import br.unirn.dominio.Selecao;
 
 /**

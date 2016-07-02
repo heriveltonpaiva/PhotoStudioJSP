@@ -16,10 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.unirn.dao.CarrinhoDao;
-import br.unirn.dao.FotoDao;
 import br.unirn.dao.VendaDao;
 import br.unirn.dominio.Carrinho;
-import br.unirn.dominio.Foto;
 import br.unirn.dominio.Venda;
 
 /**

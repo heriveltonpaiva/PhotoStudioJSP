@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.unirn.dominio.Foto;
 import br.unirn.dominio.Gestor;
 
 
@@ -40,7 +39,7 @@ public class GestorDao {
       stmt.setString(2, gestor.getSenha());
       stmt.setInt(3, gestor.getIdGestor());
       
-      //executa o código sql
+      //executa o cï¿½digo sql
       stmt.execute();     
       stmt.close();
      

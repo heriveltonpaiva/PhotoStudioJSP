@@ -2,10 +2,7 @@ package br.unirn.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
@@ -19,7 +16,6 @@ import javax.servlet.http.HttpSession;
 
 import br.unirn.dao.AlbumDao;
 import br.unirn.dominio.Album;
-import br.unirn.dominio.Cliente;
 
 /**
  * Servlet implementation class AlbumController
@@ -63,7 +59,7 @@ public class AlbumServlet extends HttpServlet {
 		
 		 if(descricao.equals("")&& obs.equals("")){
 			 
-			 request.setAttribute("mensagem","Preencha os Campos Obrigatórios"); 
+			 request.setAttribute("mensagem","Preencha os Campos Obrigatï¿½rios"); 
 			 
 			 RequestDispatcher dispatcher = request.getRequestDispatcher("pages/fotografo/formAlbum.jsp");
 		     dispatcher.forward(request, response);

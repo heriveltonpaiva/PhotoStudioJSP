@@ -1,14 +1,12 @@
 package br.unirn.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.unirn.dominio.Album;
 import br.unirn.dominio.Estado;
 
 public class EstadoDao  {
@@ -34,14 +32,14 @@ public class EstadoDao  {
 		try {
 			stmt = conexao.prepareStatement(sql);
 		} catch (SQLException e2) {
-			System.out.println("Erro na criação do Statement "+e2);
+			System.out.println("Erro na criaï¿½ï¿½o do Statement "+e2);
 		}	
 			
 		ResultSet rs =null;
 		try {
 			rs = stmt.executeQuery();
 		} catch (SQLException e1) {
-			System.out.println("Erro na criação do ResultSet "+e1);
+			System.out.println("Erro na criaï¿½ï¿½o do ResultSet "+e1);
 		}
 		
 		try {
@@ -57,7 +55,7 @@ public class EstadoDao  {
 	
 	
 	public void insert(Estado estado) throws SQLException {
-		 //PREPARA CONEXÃO
+		 //PREPARA CONEXï¿½O
 		int id = getID();
         String slq = "INSERT INTO estado(id_estado, descricao)"
                 + "values(?,?)";

@@ -1,16 +1,13 @@
 package br.unirn.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.unirn.dominio.Album;
 import br.unirn.dominio.Bairro;
-import br.unirn.dominio.Estado;
 
 public class BairroDao {
 	private Connection conexao;
@@ -58,7 +55,7 @@ public class BairroDao {
 	}
 	
 	public void insert(Bairro bairro) throws SQLException {
-		 //PREPARA CONEXÃO
+		 //PREPARA CONEXï¿½O
 		   int id = getID();
 	       String slq = "INSERT INTO bairro(id_bairro, descricao, id_cidade_cidade)VALUES (?, ?, ?)";
 	               

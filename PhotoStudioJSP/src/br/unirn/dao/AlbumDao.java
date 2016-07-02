@@ -5,12 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import br.unirn.dominio.Album;
-import br.unirn.dominio.Cliente;
-import br.unirn.dominio.Fotografo;
 
 public class AlbumDao   {
 	private Connection conexao;

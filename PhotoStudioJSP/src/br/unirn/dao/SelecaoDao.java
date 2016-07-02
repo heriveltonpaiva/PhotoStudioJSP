@@ -1,21 +1,21 @@
 package br.unirn.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unirn.dominio.Carrinho;
 import br.unirn.dominio.Selecao;
-import br.unirn.dominio.Venda;
 
-public class VendaDao {
+public class SelecaoDao {
+
 
 	private Connection conexao;
 	
-	public VendaDao() {
+	public SelecaoDao() {
 	
 		try {
 			this.conexao = Conexao.getConexao();
@@ -26,7 +26,7 @@ public class VendaDao {
 	}
 	private int getID(){
 		int result = 0;
-		String sql = "select nextval('venda_id_venda_seq')";
+		String sql = "select nextval('selecao_id_selecao_seq')";
 		
 		PreparedStatement stmt=null;
 		try {
@@ -55,59 +55,58 @@ public class VendaDao {
 		
 		return result;
 	}
-	public void insert(Venda v) throws SQLException {
-		 //PREPARA CONEX�O
+	public void insert(Selecao s) throws SQLException {
+		//PREPARA CONEX�O
 		   int id = getID();
-	       String slq = "INSERT INTO venda(id_venda, descricao, data_venda, id_selecao_selecao) VALUES (?, ?, ?, ?);";
+	       String slq = "INSERT INTO selecao(id_selecao, quantidade, tamanho, valor_venda, " +
+	       		"id_foto_foto, id_cliente_cliente, id_fotografo_fotografo)VALUES (?, ?, ?, ?, ?, ?, ?);";
 	               
 
 	       PreparedStatement stmt = conexao.prepareStatement(slq);
 
 	       // SETANDO OS VALORES
 	       stmt.setInt(1, id);
-	       stmt.setString(2, v.getDescricao());
-	       stmt.setDate(3, new java.sql.Date(v.getDataVenda().getTime()));
-	       stmt.setInt(4, v.getSelecao());
-	       
-	       v.setIdVenda(id);
+	       stmt.setInt(2, s.getQuantidade());
+	       stmt.setString(3, s.getTamanho());
+	       stmt.setDouble(4, s.getValor_venda());
+	       stmt.setInt(5, s.getIdfoto());
+	       stmt.setInt(6, s.getIdcliente());
+	       stmt.setInt(7, s.getIdfotografo());
+	       s.setIdSelecao(id);
 
 	       //executa o codigo SQL
 	       stmt.execute();
 	       stmt.close();
 	}
 
-	public void update(Venda venda) throws SQLException {
-		String sql = "update venda set descricao=?, data_venda=?, id_selecao_selecao=? where id_venda=?";
-		
-			PreparedStatement stmt = conexao.prepareStatement(sql);
-			stmt.setString(1, venda.getDescricao());
-			stmt.setDate(2, (Date) venda.getDataVenda());
-			stmt.setInt(3, venda.getSelecao());
-			stmt.setInt(4, venda.getIdVenda());
-	
-			stmt.execute();
-			stmt.close();
+	public void adicionarSelecaoCarrinho(Selecao selecao, Carrinho carrinho) throws SQLException{
 			
-			System.out.println("Alterado com sucesso");
-	}
-
+		this.insert(selecao);
 	
-	public List<Venda> findAll() throws SQLException {
-		String sql = "SELECT*FROM venda";
+		CarrinhoDao dao = new CarrinhoDao();
+		
+		carrinho.setSelecao(selecao.getIdSelecao());
+	
+		dao.insert(carrinho);
+	}
+	
+	
+	
+	public List<Selecao> findAll() throws SQLException {
+		String sql = "SELECT*FROM selecao";
         PreparedStatement stmt = this.conexao.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
-        SelecaoDao dao = new SelecaoDao();
         // criando arraylist 
-        List<Venda> Lista = new ArrayList<Venda>();
+        List<Selecao> Lista = new ArrayList<Selecao>();
         while (rs.next()) {
             // estanciando 
-            Venda v = new Venda();
+            Selecao s = new Selecao();
             // pegando os objetos 
-            v.setIdVenda(rs.getInt("id_venda"));
-            v.setDescricao(rs.getString("descricao"));
-            v.setDataVenda(new java.sql.Date(v.getDataVenda().getTime()));
-            v.setIdSelecaoSelecao((Selecao)dao.findById(Integer.parseInt(rs.getString("id_selecao_selecao"))));
-            Lista.add(v);
+            s.setIdSelecao(rs.getInt("id_selecao"));
+            s.setTamanho(rs.getString("tamanho"));
+            s.setQuantidade(rs.getInt("quantidade"));
+            s.setValor_venda(rs.getDouble("valor_venda"));
+            Lista.add(s);
         }
         rs.close();
         stmt.close();
@@ -119,5 +118,4 @@ public class VendaDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

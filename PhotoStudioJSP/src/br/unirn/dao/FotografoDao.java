@@ -8,10 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.unirn.dominio.Album;
 import br.unirn.dominio.Bairro;
 import br.unirn.dominio.Cidade;
-import br.unirn.dominio.Cliente;
 import br.unirn.dominio.Contato;
 import br.unirn.dominio.Endereco;
 import br.unirn.dominio.Estado;
@@ -222,6 +220,7 @@ public void adicionarUsuario(Fotografo usuario, Endereco endereco, Bairro bairro
 	}
 
 
+@SuppressWarnings("deprecation")
 public void insert(Fotografo c) throws SQLException {
 
 	 //PREPARA CONEXÃO

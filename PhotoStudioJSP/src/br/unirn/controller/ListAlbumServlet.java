@@ -2,7 +2,6 @@ package br.unirn.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.unirn.dao.AlbumDao;
 import br.unirn.dominio.Album;
-import br.unirn.dominio.Cliente;
 
 /**
  * Servlet implementation class AlbumController

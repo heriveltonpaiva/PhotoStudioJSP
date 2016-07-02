@@ -1,13 +1,11 @@
 package br.unirn.controller;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -15,14 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-
-import sun.jdbc.odbc.OdbcDef;
 
 import br.unirn.dao.AlbumDao;
 import br.unirn.dao.FotoDao;
 import br.unirn.dominio.Album;
-import br.unirn.dominio.Cliente;
 import br.unirn.dominio.Foto;
 
 /**
@@ -139,11 +133,7 @@ public class ListFotoServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		String id = request.getParameter("id");
 		String op = request.getParameter("op");
-		
-		
 		
 		if(op==null){
 		List<Album> listaAlbum;

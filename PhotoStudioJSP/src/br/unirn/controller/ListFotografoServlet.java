@@ -2,10 +2,10 @@ package br.unirn.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,12 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.unirn.dao.FotografoDao;
-import br.unirn.dominio.Bairro;
-import br.unirn.dominio.Cidade;
-import br.unirn.dominio.Cliente;
-import br.unirn.dominio.Contato;
-import br.unirn.dominio.Endereco;
-import br.unirn.dominio.Estado;
 import br.unirn.dominio.Fotografo;
 
 /**

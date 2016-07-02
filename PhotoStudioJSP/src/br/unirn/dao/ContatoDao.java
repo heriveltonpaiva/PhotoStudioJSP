@@ -1,16 +1,13 @@
 package br.unirn.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.unirn.dominio.Album;
 import br.unirn.dominio.Contato;
-import br.unirn.dominio.Estado;
 
 public class ContatoDao{
 	private Connection conexao;
@@ -56,7 +53,7 @@ public class ContatoDao{
 		return result;
 	}
 	public void insert(Contato c) throws SQLException {
-		 //PREPARA CONEXÃO
+		 //PREPARA CONEXï¿½O
 		   int id = getID();
 	       String slq = "INSERT INTO contato(id_contato, telefone, celular, email)VALUES (?, ?, ?, ?);";
 	               

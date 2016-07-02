@@ -1,11 +1,11 @@
 package br.unirn.controller;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,16 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import br.unirn.dao.ClienteDao;
-import br.unirn.dao.Conexao;
 import br.unirn.dominio.Bairro;
 import br.unirn.dominio.Cidade;
 import br.unirn.dominio.Cliente;
 import br.unirn.dominio.Contato;
 import br.unirn.dominio.Endereco;
 import br.unirn.dominio.Estado;
-import br.unirn.dominio.Fotografo;
 import br.unirn.dominio.Fotografocliente;
-import br.unirn.dominio.Gestor;
 
 /**
  * Servlet implementation class Cliente
